@@ -1,0 +1,24 @@
+﻿{
+    "Name": "Test2",
+    "Width": 0,
+    "Height": 0,
+    "BackgroundFileName": ".jpg",
+    "KeyValueList": [
+        {
+            "X": 0,
+            "Y": 0,
+            "Width": 0,
+            "Height": 0,
+            "Key": "Key1",
+            "Value": "Value"
+        },
+        {
+            "X": 0,
+            "Y": 0,
+            "Width": 0,
+            "Height": 0,
+            "Key": "Key2",
+            "Value": "Value"
+        }
+    ]
+}

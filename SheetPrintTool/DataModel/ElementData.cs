@@ -1,4 +1,7 @@
-﻿namespace SheetPrintTool.DataModel
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace SheetPrintTool.DataModel
 {
     public class ElementData
     {
@@ -15,9 +18,14 @@
         /// </summary>
         public int Width { get; set; }
         /// <summary>
-        /// 长度
+        /// 高度
         /// </summary>
         public int Height { get; set; }
+        /// <summary>
+        /// 元素类型
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ElementTag Tag { get; set; }
         public string Key { get; set; }
         public string Value { get; set; }
     }

@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModel\ConfigData.cs" />
     <Compile Include="DataModel\ElementData.cs" />
+    <Compile Include="DataModel\SenderInfoData.cs" />
     <Compile Include="DataModel\TemplateData.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -56,11 +58,11 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormInputBase.cs">
+    <Compile Include="FormInputCommon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormInputBase.Designer.cs">
-      <DependentUpon>FormInputBase.cs</DependentUpon>
+    <Compile Include="FormInputCommon.Designer.cs">
+      <DependentUpon>FormInputCommon.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalData.cs" />
     <Compile Include="Program.cs" />
@@ -69,8 +71,8 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormInputBase.resx">
-      <DependentUpon>FormInputBase.cs</DependentUpon>
+    <EmbeddedResource Include="FormInputCommon.resx">
+      <DependentUpon>FormInputCommon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -81,6 +83,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

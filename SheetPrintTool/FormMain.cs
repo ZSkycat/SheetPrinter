@@ -18,14 +18,20 @@ namespace SheetPrintTool
             InitializeComponent();
         }
 
-        void LoadConfig()
+        private void FormMain_Load(object sender, EventArgs e)
         {
-
+            lbTemplate.DisplayMember = "Name";
+            foreach (var i in GlobalData.TemplateList)
+            {
+                lbTemplate.Items.Add(i);
+            }
+            
         }
 
-        void SaveConfig()
+        private void toolStripMenuItem关于_Click(object sender, EventArgs e)
         {
-
+            var v = new FormInputCommon();
+            v.Show();
         }
     }
 }

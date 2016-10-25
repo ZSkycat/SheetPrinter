@@ -1,2 +1,2 @@
 # SheetPrintTool
-单据打印工具。
+物流单据打印工具。

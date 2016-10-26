@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SheetPrintTool.DataModel
 {
-    class SenderInfoData
+    public class SenderInfoData
     {
     }
 }

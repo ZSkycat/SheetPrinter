@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SheetPrintTool.DataModel
 {
+    /// <summary>
+    /// 模板数据模型
+    /// </summary>
+    [Serializable]
     public class TemplateData : IComparable<TemplateData>
     {
         /// <summary>
@@ -12,16 +18,31 @@ namespace SheetPrintTool.DataModel
         /// <summary>
         /// 宽度
         /// </summary>
-        public int Width { get; set; }
+        public float Width { get; set; }
         /// <summary>
         /// 高度
         /// </summary>
-        public int Height { get; set; }
+        public float Height { get; set; }
         /// <summary>
         /// 背景图路径
         /// </summary>
         public string BackgroundFileName { get; set; }
-        public List<ElementData> KeyValueList { get; set; }
+        /// <summary>
+        /// 元素列表
+        /// </summary>
+        public List<ElementData> ElementList { get; set; }
+        
+        public TemplateData Clone()
+        {
+            using (var stream = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(stream, this);
+                stream.Position = 0;
+                var obj = formatter.Deserialize(stream);
+                return (TemplateData)obj;
+            }
+        }
 
         public int CompareTo(TemplateData other)
         {

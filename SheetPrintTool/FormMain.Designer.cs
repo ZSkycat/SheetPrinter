@@ -109,7 +109,6 @@
             this.toolStripMenuItem关于.Name = "toolStripMenuItem关于";
             this.toolStripMenuItem关于.Size = new System.Drawing.Size(44, 21);
             this.toolStripMenuItem关于.Text = "关于";
-            this.toolStripMenuItem关于.Click += new System.EventHandler(this.toolStripMenuItem关于_Click);
             // 
             // splitContainer1
             // 
@@ -169,6 +168,9 @@
             // 
             // lbTemplate
             // 
+            this.lbTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbTemplate.FormattingEnabled = true;
             this.lbTemplate.ItemHeight = 19;
             this.lbTemplate.Location = new System.Drawing.Point(10, 85);
@@ -176,9 +178,13 @@
             this.lbTemplate.Name = "lbTemplate";
             this.lbTemplate.Size = new System.Drawing.Size(190, 327);
             this.lbTemplate.TabIndex = 0;
+            this.lbTemplate.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbTemplate_MouseDoubleClick);
             // 
             // lvTaskList
             // 
+            this.lvTaskList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvTaskList.Location = new System.Drawing.Point(0, 30);
             this.lvTaskList.Name = "lvTaskList";
             this.lvTaskList.Size = new System.Drawing.Size(400, 382);

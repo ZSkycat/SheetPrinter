@@ -12,8 +12,8 @@ namespace SheetPrintTool
         static void Main()
         {
             //加载配置
-            GlobalData.LoadTemplateList();
             GlobalData.LoadConfig();
+            GlobalData.LoadTemplateList();
 
             //Form初始化
             Application.EnableVisualStyles();

@@ -1,10 +1,8 @@
-﻿using SheetPrintTool.DataModel;
-using System;
+﻿using Newtonsoft.Json;
+using SheetPrintTool.DataModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 using System.IO;
-using Newtonsoft.Json;
 using System.Windows.Forms;
 
 namespace SheetPrintTool
@@ -12,16 +10,29 @@ namespace SheetPrintTool
     public static class GlobalData
     {
         //配置参数
-        public static int InputModeIndxe { get; set; }
+        public static int InputModeIndex { get; set; }
+        public static Font Font { get; set; }
+        public static string templatePath { get; set; }
 
         public static List<TemplateData> TemplateList { get; set; } = new List<TemplateData>();
+
+        /// <summary>
+        /// 加载配置
+        /// </summary>
+        public static void LoadConfig()
+        {
+            //!!!
+            InputModeIndex = 0;
+            Font = new Font(new FontFamily("黑体"), 12f);
+            templatePath = $@"{Application.StartupPath}\Template";
+        }
 
         /// <summary>
         /// 加载模版
         /// </summary>
         public static void LoadTemplateList()
         {
-            string[] filePaths = Directory.GetFiles($@"{Application.StartupPath}\Template", "*.json");
+            string[] filePaths = Directory.GetFiles(templatePath, "*.json");
             foreach (var i in filePaths)
             {
                 var json = File.ReadAllText(i);
@@ -30,39 +41,6 @@ namespace SheetPrintTool
             }
             TemplateList.Sort();
         }
-
-        /// <summary>
-        /// 加载配置
-        /// </summary>
-        public static void LoadConfig()
-        {
-            //!!!
-            InputModeIndxe = 0;
-        }
-    }
-
-    /// <summary>
-    /// 元素标签，标识类型或特殊字段
-    /// </summary>
-    public enum ElementTag
-    {
-        Text,
-        寄件人姓名 = 100,
-        寄件人单位,
-        寄件人邮编,
-        寄件人地址,
-        寄件人电话,
-        寄件人签名,
-        收件人姓名 = 200,
-        收件人单位,
-        收件人邮编,
-        收件人地址,
-        收件人电话,
-        收件人目的地,
-        Year = 500,
-        Month,
-        Day,
-        Hour
     }
 
     /// <summary>

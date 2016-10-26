@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SheetPrintTool.Core;
+using SheetPrintTool.DataModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,16 +13,58 @@ namespace SheetPrintTool
 {
     public partial class FormInputCommon : Form
     {
-        public FormInputCommon()
+        TemplateData data;
+        PrintControl print;
+
+        Panel preview;
+
+        public FormInputCommon(TemplateData data)
         {
             InitializeComponent();
+            this.data = data;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FormInputCommon_Load(object sender, EventArgs e)
         {
-            Graphics g = panel1.CreateGraphics();
-            g.DrawImageUnscaled(Image.FromFile(@"E:\SheetPrintTool\SheetPrintTool\Template\test.jpg"), new Point());
-            g.DrawString("测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本", Font, Brushes.Black, new RectangleF(50, 50, 50, 50));
+            print = new PrintControl(data);
+            InitInput();
+            InitPreviewPanel();
+        }
+
+        private void toolStripButton清空输入_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton添加任务_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton直接打印_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        void InitInput()
+        {
+
+        }
+
+        void InitPreviewPanel()
+        {
+            preview = new Panel()
+            {
+                Width = Convert.ToInt32(data.Width),
+                Height = Convert.ToInt32(data.Height)
+            };
+            pPreview.Controls.Add(preview);
+            preview.Paint += (sender, e) => { print.Preview(e.Graphics, data); };
+        }
+
+        void Preview()
+        {
+            print.Preview(preview.CreateGraphics(), data);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿{
     "Name": "韵达快递",
-    "Width": 2300,
-    "Height": 1270,
+    "Width": 230,
+    "Height": 127,
     "BackgroundFileName": "韵达快递.jpg",
     "ElementList": [
         {
@@ -123,7 +123,7 @@
         },
         {
             "X": 0,
-            "Y": 0,
+            "Y": 20,
             "Width": 0,
             "Height": 0,
 			"Tag": "Month",
@@ -132,7 +132,7 @@
         },
         {
             "X": 0,
-            "Y": 0,
+            "Y": 40,
             "Width": 0,
             "Height": 0,
 			"Tag": "Day",
@@ -141,7 +141,7 @@
         },
         {
             "X": 0,
-            "Y": 0,
+            "Y": 60,
             "Width": 0,
             "Height": 0,
 			"Tag": "Hour",

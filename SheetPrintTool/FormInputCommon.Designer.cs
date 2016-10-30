@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInputCommon));
             this.pInput = new System.Windows.Forms.Panel();
+            this.cbSelectSender = new System.Windows.Forms.ComboBox();
             this.pPreview = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.toolStripButton清空输入 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton添加任务 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton直接打印 = new System.Windows.Forms.ToolStripButton();
+            this.pInput.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,11 +48,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pInput.AutoScroll = true;
             this.pInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pInput.Controls.Add(this.cbSelectSender);
             this.pInput.Location = new System.Drawing.Point(5, 55);
             this.pInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pInput.Name = "pInput";
             this.pInput.Size = new System.Drawing.Size(600, 200);
             this.pInput.TabIndex = 3;
+            // 
+            // cbSelectSender
+            // 
+            this.cbSelectSender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSelectSender.FormattingEnabled = true;
+            this.cbSelectSender.Items.AddRange(new object[] {
+            "点击填充寄件人"});
+            this.cbSelectSender.Location = new System.Drawing.Point(10, 10);
+            this.cbSelectSender.Name = "cbSelectSender";
+            this.cbSelectSender.Size = new System.Drawing.Size(140, 27);
+            this.cbSelectSender.TabIndex = 0;
             // 
             // pPreview
             // 
@@ -145,6 +159,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "数据输入 - 通用编辑模式";
             this.Load += new System.EventHandler(this.FormInputCommon_Load);
+            this.pInput.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -161,5 +176,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton清空输入;
         private System.Windows.Forms.ToolStripButton toolStripButton添加任务;
         private System.Windows.Forms.ToolStripButton toolStripButton直接打印;
+        private System.Windows.Forms.ComboBox cbSelectSender;
     }
 }

@@ -1,40 +1,89 @@
 ﻿{
-    "Name": "Test3",
-    "Width": 809,
-    "Height": 518,
-    "BackgroundFileName": "test.jpg",
-    "KeyValueList": [
+    "Name": "test",
+    "Width": 230,
+    "Height": 127,
+    "BackgroundFileName": "韵达快递.jpg",
+    "ElementList": [
         {
             "X": 0,
             "Y": 0,
             "Width": 0,
             "Height": 0,
-            "Key": "Key1",
-            "Value": "Value"
+			"Tag": "寄件人地址",
+            "Key": "",
+            "Value": ""
         },
         {
             "X": 0,
             "Y": 0,
             "Width": 0,
             "Height": 0,
-            "Key": "Key2",
-            "Value": "Value"
+			"Tag": "寄件人电话",
+            "Key": "",
+            "Value": ""
         },
         {
             "X": 0,
             "Y": 0,
             "Width": 0,
             "Height": 0,
-            "Key": "Key4",
-            "Value": "Value"
+			"Tag": "寄件人签名",
+            "Key": "",
+            "Value": ""
         },
         {
             "X": 0,
             "Y": 0,
             "Width": 0,
             "Height": 0,
-            "Key": "Key3",
-            "Value": "Value"
+			"Tag": "收件人姓名",
+            "Key": "",
+            "Value": ""
+        },
+        {
+            "X": 0,
+            "Y": 0,
+            "Width": 0,
+            "Height": 0,
+			"Tag": "收件人单位",
+            "Key": "",
+            "Value": ""
+        },
+        {
+            "X": 0,
+            "Y": 0,
+            "Width": 0,
+            "Height": 0,
+			"Tag": "收件人邮编",
+            "Key": "",
+            "Value": ""
+        },
+        {
+            "X": 0,
+            "Y": 0,
+            "Width": 0,
+            "Height": 0,
+			"Tag": "收件人地址",
+            "Key": "",
+            "Value": ""
+        },
+        {
+            "X": 0,
+            "Y": 0,
+            "Width": 0,
+            "Height": 0,
+			"Tag": "收件人电话",
+            "Key": "",
+            "Value": ""
+        },
+        {
+            "X": 0,
+            "Y": 0,
+            "Width": 0,
+            "Height": 0,
+			"Tag": "收件人目的地",
+            "Key": "",
+            "Value": ""
         }
     ]
 }

@@ -50,7 +50,7 @@ namespace SheetPrintTool
         /// <summary>
         /// 打开数据输入窗口
         /// </summary>
-        void OpenTemplateInputForm(TemplateData data)
+        private void OpenTemplateInputForm(TemplateData data)
         {
             switch ((InputMode)cbInputMode.SelectedItem)
             {

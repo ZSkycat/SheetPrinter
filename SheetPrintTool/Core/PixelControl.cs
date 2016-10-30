@@ -10,12 +10,12 @@ namespace SheetPrintTool.Core
         public const int DpiDefault = 96;
         public const int DpiDefaultFont = 72;
 
-        public static float GetPixelForDpi(float mm, int currentDpi, int targetDpi)
+        public static float MillimeterToPixelForDpi(float mm, int dpi)
         {
             return 0;
         }
 
-        public static float GetFontSizeForDpi(float emSize, int dpi)
+        public static float PonitToFontSizeForDpi(float pSize, int dpi)
         {
             return 0;
         }

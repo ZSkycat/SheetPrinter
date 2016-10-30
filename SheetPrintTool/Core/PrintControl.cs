@@ -28,7 +28,7 @@ namespace SheetPrintTool.Core
         /// <param name="data">模版信息数据</param>
         public void Preview(Graphics g, TemplateData data)
         {
-            g.DrawImage(image, new RectangleF(0, 0, imageWidth, imageHeight));
+            g.DrawImage(image, new RectangleF(0, 0, imageWidth, imageHeight), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Millimeter);
             foreach (var i in data.ElementList)
             {
                 g.DrawString(i.Value, GlobalData.Font, Brushes.Black, new RectangleF(i.X, i.Y, i.Width, i.Height));

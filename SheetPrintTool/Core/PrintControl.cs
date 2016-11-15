@@ -17,8 +17,8 @@ namespace SheetPrintTool.Core
         {
             //!!!
             image = Image.FromFile($@"{GlobalData.templatePath}\{data.BackgroundFileName}");
-            imageWidth = data.Width;
-            imageHeight = data.Height;
+            imageWidth = UnitlHelper.MillimeterToPixelWithDpi(data.Width, 96);
+            imageHeight = UnitlHelper.MillimeterToPixelWithDpi(data.Height, 96);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace SheetPrintTool.Core
         /// <param name="data">模版信息数据</param>
         public void Preview(Graphics g, TemplateData data)
         {
-            g.DrawImage(image, new RectangleF(0, 0, imageWidth, imageHeight), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Millimeter);
+            g.DrawImage(image, new RectangleF(0f, 0f, imageWidth, imageHeight), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
             foreach (var i in data.ElementList)
             {
                 g.DrawString(i.Value, GlobalData.Font, Brushes.Black, new RectangleF(i.X, i.Y, i.Width, i.Height));

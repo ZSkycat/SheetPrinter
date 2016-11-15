@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\PixelControl.cs" />
+    <Compile Include="Core\UnitlHelper.cs" />
     <Compile Include="Core\PrintControl.cs" />
     <Compile Include="DataModel\ConfigData.cs" />
     <Compile Include="DataModel\ElementData.cs" />

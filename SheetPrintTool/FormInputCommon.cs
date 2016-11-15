@@ -39,12 +39,12 @@ namespace SheetPrintTool
         {
             foreach (var i in pInput.Controls)
             {
-                if(i is TextBox)
+                if (i is TextBox)
                 {
                     var control = (TextBox)i;
                     control.Clear();
                 }
-                else if(i is DateTimePicker)
+                else if (i is DateTimePicker)
                 {
                     var control = (DateTimePicker)i;
                     control.Value = DateTime.Now;
@@ -101,7 +101,7 @@ namespace SheetPrintTool
                     }
                 }
             }
-            if(dataDateTime != null)
+            if (dataDateTime != null)
             {  //创建日期时间控件
                 var label = new Label()
                 {
@@ -179,9 +179,9 @@ namespace SheetPrintTool
         private void TagDate_TextChanged(object sender, EventArgs e)
         {
             var dtp = sender as DateTimePicker;
-            foreach(var i in dataDateTime)
+            foreach (var i in dataDateTime)
             {
-                switch(i.Tag)
+                switch (i.Tag)
                 {
                     case ElementTag.Year:
                         i.Value = dtp.Value.Year.ToString();
@@ -207,8 +207,8 @@ namespace SheetPrintTool
         {
             preview = new Panel()
             {
-                Width = Convert.ToInt32(data.Width),
-                Height = Convert.ToInt32(data.Height)
+                Width = Convert.ToInt32(UnitlHelper.MillimeterToPixelWithDpi(data.Width, 96)),
+                Height = Convert.ToInt32(UnitlHelper.MillimeterToPixelWithDpi(data.Height, 96))
             };
             pPreview.Controls.Add(preview);
             preview.Paint += (sender, e) => { print.Preview(e.Graphics, data); };

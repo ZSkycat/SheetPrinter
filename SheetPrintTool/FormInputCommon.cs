@@ -31,8 +31,8 @@ namespace SheetPrintTool
         private void FormInputCommon_Load(object sender, EventArgs e)
         {
             print = new PrintControl(data);
+            print.InitPreview(pPreview);
             InitInput();
-            InitPreviewPanel();
         }
 
         private void toolStripButton清空输入_Click(object sender, EventArgs e)
@@ -158,7 +158,7 @@ namespace SheetPrintTool
             var tag = (ElementTag)tb.Tag;
             var element = data.ElementList.Find(obj => obj.Tag == tag);
             element.Value = tb.Text;
-            RefreshPreview();
+            print.RefreshPreview();
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace SheetPrintTool
             var key = (string)tb.Tag;
             var element = data.ElementList.Find(obj => obj.Key == key);
             element.Value = tb.Text;
-            RefreshPreview();
+            print.RefreshPreview();
         }
 
         /// <summary>
@@ -197,29 +197,7 @@ namespace SheetPrintTool
                         break;
                 }
             }
-            RefreshPreview();
-        }
-
-        /// <summary>
-        /// 初始化预览面板
-        /// </summary>
-        private void InitPreviewPanel()
-        {
-            preview = new Panel()
-            {
-                Width = Convert.ToInt32(UnitlHelper.MillimeterToPixelWithDpi(data.Width, 96)),
-                Height = Convert.ToInt32(UnitlHelper.MillimeterToPixelWithDpi(data.Height, 96))
-            };
-            pPreview.Controls.Add(preview);
-            preview.Paint += (sender, e) => { print.Preview(e.Graphics, data); };
-        }
-
-        /// <summary>
-        /// 刷新预览图
-        /// </summary>
-        private void RefreshPreview()
-        {
-            print.Preview(preview.CreateGraphics(), data);
+            print.RefreshPreview();
         }
     }
 }

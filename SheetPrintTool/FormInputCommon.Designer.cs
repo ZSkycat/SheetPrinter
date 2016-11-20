@@ -71,7 +71,6 @@
             this.pPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pPreview.AutoScroll = true;
             this.pPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pPreview.Location = new System.Drawing.Point(5, 285);
             this.pPreview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

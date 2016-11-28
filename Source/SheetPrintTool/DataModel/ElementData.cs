@@ -46,14 +46,14 @@ namespace SheetPrintTool.DataModel
     /// </summary>
     public enum ElementTag
     {
-        //通用类型
+        // 通用类型
         Text,
-        //特殊类型
+        // 特殊类型
         Year = 100,
         Month,
         Day,
         Hour,
-        //特殊字段
+        // 特殊字段
         寄件人姓名 = 200,
         寄件人单位,
         寄件人邮编,
@@ -67,7 +67,7 @@ namespace SheetPrintTool.DataModel
         收件人电话,
         收件人目的地,
         物品名称,
-        //统一文字，无实际作用
+        // 统一文字，无实际作用
         寄件时间 = 1000
     }
 }

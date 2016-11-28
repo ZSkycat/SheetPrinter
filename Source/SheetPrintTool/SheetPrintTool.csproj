@@ -106,9 +106,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Template\韵达快递.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

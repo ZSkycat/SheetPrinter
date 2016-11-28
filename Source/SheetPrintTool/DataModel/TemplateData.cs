@@ -24,7 +24,7 @@ namespace SheetPrintTool.DataModel
         /// </summary>
         public float Height { get; set; }
         /// <summary>
-        /// 背景图路径
+        /// 背景图名称
         /// </summary>
         public string BackgroundFileName { get; set; }
         /// <summary>
@@ -32,6 +32,9 @@ namespace SheetPrintTool.DataModel
         /// </summary>
         public List<ElementData> ElementList { get; set; }
         
+        /// <summary>
+        /// 克隆对象
+        /// </summary>
         public TemplateData Clone()
         {
             using (var stream = new MemoryStream())

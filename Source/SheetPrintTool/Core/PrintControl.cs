@@ -12,6 +12,7 @@ namespace SheetPrintTool.Core
 {
     public class PrintControl
     {
+        List<TemplateData> dataList;
         TemplateData data;
         Image image;
 
@@ -26,7 +27,12 @@ namespace SheetPrintTool.Core
         {
             this.data = data;
             //!!!
-            image = Image.FromFile($@"{GlobalData.templatePath}\{data.BackgroundFileName}");
+            image = Image.FromFile($@"{Global.TemplatePath}\{data.BackgroundFileName}");
+        }
+
+        public PrintControl(List<TemplateData> datalist)
+        {
+
         }
 
         #region 预览功能
@@ -40,8 +46,8 @@ namespace SheetPrintTool.Core
             previewContainer = container;
             preview = new Panel()
             {
-                Width = Convert.ToInt32(MmToPxAtDpi(data.Width, 96)),
-                Height = Convert.ToInt32(MmToPxAtDpi(data.Height, 96))
+                Width = Convert.ToInt32(MmToPxAtDpi(data.Width, Global.DpiX)),
+                Height = Convert.ToInt32(MmToPxAtDpi(data.Height, Global.DpiY))
             };
             previewContainer.Controls.Add(preview);
             preview.Paint += (sender, e) => { Preview(e.Graphics); };
@@ -64,7 +70,7 @@ namespace SheetPrintTool.Core
             g.DrawImage(image, new RectangleF(0f, 0f, MmToPxAtDpi(data.Width, 96), MmToPxAtDpi(data.Height, 96)), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
             foreach (var i in data.ElementList)
             {
-                g.DrawString(i.Value, GlobalData.Font, Brushes.Black, new RectangleF(MmToPxAtDpi(i.X, 96), MmToPxAtDpi(i.Y, 96), MmToPxAtDpi(i.Width, 96), MmToPxAtDpi(i.Height, 96)));
+                g.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPxAtDpi(i.X, 96), MmToPxAtDpi(i.Y, 96), MmToPxAtDpi(i.Width, 96), MmToPxAtDpi(i.Height, 96)));
             }
         }
         #endregion

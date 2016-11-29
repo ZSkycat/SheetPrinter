@@ -11,11 +11,10 @@ namespace SheetPrintTool
         [STAThread]
         static void Main()
         {
-            //加载配置
-            GlobalData.LoadConfig();
-            GlobalData.LoadTemplateList();
+            // 数据初始化
+            Global.InitGlobal();
 
-            //Form初始化
+            // Form初始化
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());

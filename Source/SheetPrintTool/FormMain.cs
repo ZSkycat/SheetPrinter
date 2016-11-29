@@ -20,7 +20,11 @@ namespace SheetPrintTool
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            //初始化输入模式
+            // 初始化 dpi
+            Graphics g = CreateGraphics();
+            Global.DpiX = g.DpiX;
+            Global.DpiY = g.DpiY;
+            // 初始化数据录入模式
             for (var i = 0; true; i++)
             {
                 if (Enum.GetName(typeof(InputMode), i) != null)
@@ -28,12 +32,27 @@ namespace SheetPrintTool
                 else
                     break;
             }
-            cbInputMode.SelectedIndex = GlobalData.InputModeIndex;
-            //初始模版列表
+            cbInputMode.SelectedIndex = Global.Config.InputModeIndex;
+            // 初始模版列表
             lbTemplate.DisplayMember = "Name";
-            foreach (var i in GlobalData.TemplateList)
+            foreach (var i in Global.TemplateList)
             {
                 lbTemplate.Items.Add(i);
+            }
+        }
+
+        private void toolStripMenuItem字体配置_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog()
+            {
+                AllowVerticalFonts = false,
+                ShowEffects = false,
+                Font = Global.Config.Font
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                Global.Config.Font = dialog.Font;
+                Global.SaveConfig();
             }
         }
 

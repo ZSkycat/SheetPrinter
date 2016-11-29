@@ -20,8 +20,6 @@ namespace SheetPrintTool
         PrintControl print;
         List<ElementData> dataDateTime;
 
-        Panel preview;
-
         public FormInputCommon(TemplateData data)
         {
             InitializeComponent();
@@ -67,15 +65,16 @@ namespace SheetPrintTool
         /// </summary>
         void InitInput()
         {
-            //自动填充
+            // 自动填充
             cbSelectSender.SelectedIndex = 0;
-            //数据输入
+            // 数据输入
             int currentY = InitY;
             foreach (var i in data.ElementList)
             {
                 int tagInt = (int)i.Tag;
+                // 处理特殊字段
                 if (tagInt >= 200 && tagInt < 400)
-                {  //处理特殊字段
+                {
                     CreateTextBox(currentY, i, i.Tag, Tag200to400_TextChanged);
                     currentY += ChangeY;
                 }
@@ -101,8 +100,9 @@ namespace SheetPrintTool
                     }
                 }
             }
+            // 创建日期时间控件
             if (dataDateTime != null)
-            {  //创建日期时间控件
+            {
                 var label = new Label()
                 {
                     Location = new Point(LabelX, currentY),
@@ -119,8 +119,9 @@ namespace SheetPrintTool
                 pInput.Controls.Add(label);
                 pInput.Controls.Add(date);
             }
+            // 防止因为滚动出现，导致宽度减小，同时在Anchor作用下导致TextBox宽度减小
             foreach (var i in pInput.Controls)
-            {  //防止因为滚动出现，导致宽度减小，同时在Anchor作用下导致TextBox宽度减小
+            {
                 var tb = i as TextBox;
                 if (tb != null)
                     tb.Anchor = TextBoxAnchor;

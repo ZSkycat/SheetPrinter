@@ -74,14 +74,15 @@
             // toolStripMenuItem寄件人管理
             // 
             this.toolStripMenuItem寄件人管理.Name = "toolStripMenuItem寄件人管理";
-            this.toolStripMenuItem寄件人管理.Size = new System.Drawing.Size(136, 22);
+            this.toolStripMenuItem寄件人管理.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem寄件人管理.Text = "寄件人管理";
             // 
             // toolStripMenuItem字体配置
             // 
             this.toolStripMenuItem字体配置.Name = "toolStripMenuItem字体配置";
-            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(136, 22);
+            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem字体配置.Text = "字体配置";
+            this.toolStripMenuItem字体配置.Click += new System.EventHandler(this.toolStripMenuItem字体配置_Click);
             // 
             // toolStripMenuItem任务
             // 
@@ -95,13 +96,13 @@
             // toolStripMenuItem打印
             // 
             this.toolStripMenuItem打印.Name = "toolStripMenuItem打印";
-            this.toolStripMenuItem打印.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem打印.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem打印.Text = "打印";
             // 
             // toolStripMenuItem清空
             // 
             this.toolStripMenuItem清空.Name = "toolStripMenuItem清空";
-            this.toolStripMenuItem清空.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem清空.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem清空.Text = "清空";
             // 
             // toolStripMenuItem关于

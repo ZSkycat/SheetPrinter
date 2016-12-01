@@ -1,9 +1,9 @@
 ﻿{
     "Name": "Test1",
-    "Width": 0,
-    "Height": 0,
+    "Width": 100,
+    "Height": 100,
     "BackgroundFileName": ".jpg",
-    "KeyValueList": [
+    "ElementList": [
         {
             "X": 0,
             "Y": 0,

@@ -1,7 +1,11 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace SheetPrintTool.DataModel
 {
+    /// <summary>
+    /// 配置数据模型
+    /// </summary>
     public class ConfigData
     {
         /// <summary>
@@ -12,6 +16,11 @@ namespace SheetPrintTool.DataModel
         /// <summary>
         /// 字体配置
         /// </summary>
-        public Font Font { get; set; } = new Font(new FontFamily("黑体"), 12f);
+        public Font Font { get; set; } = new Font(new FontFamily("黑体"), 12f, FontStyle.Bold);
+
+        /// <summary>
+        /// 信息数据
+        /// </summary>
+        public List<InfoData> InfoList = new List<InfoData>();
     }
 }

@@ -18,7 +18,9 @@ namespace SheetPrintTool
 
         TemplateData data;
         PrintControl print;
-        List<ElementData> dataDateTime;
+        // Tag.Year Month Day Hour 数据
+        List<ElementData> dateTimeList;
+        CheckBox cbDateTime;  //! 实现开关时间戳功能
 
         public FormInputCommon(TemplateData data)
         {
@@ -57,7 +59,14 @@ namespace SheetPrintTool
 
         private void toolStripButton直接打印_Click(object sender, EventArgs e)
         {
+            print.Print();
+        }
 
+        private void cbSelectSender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbSelectSender.SelectedIndex = -1;
+
+            //! 实现填充功能
         }
 
         /// <summary>
@@ -65,27 +74,34 @@ namespace SheetPrintTool
         /// </summary>
         void InitInput()
         {
-            // 自动填充
-            cbSelectSender.SelectedIndex = 0;
-            // 数据输入
+            // 填充信息功能
+            cbSelectSender.DataSource = Global.Config.InfoList;
+            cbSelectSender.DisplayMember = "Name";
+            cbSelectSender.SelectedIndex = -1;
+
+            // 数据输入功能
             int currentY = InitY;
             foreach (var i in data.ElementList)
             {
+                // 根据元素类型处理
                 int tagInt = (int)i.Tag;
-                // 处理特殊字段
                 if (tagInt >= 200 && tagInt < 400)
                 {
-                    CreateTextBox(currentY, i, i.Tag, Tag200to400_TextChanged);
+                    CreateTag200to400(currentY, i);
                     currentY += ChangeY;
                 }
                 else
                 {
                     switch (i.Tag)
                     {
+                        case ElementTag.Text:
+                            CreateTagText(currentY, i);
+                            currentY += ChangeY;
+                            break;
                         case ElementTag.Year:
-                            if (dataDateTime == null)
-                                dataDateTime = new List<ElementData>();
-                            dataDateTime.Add(i);
+                            if (dateTimeList == null)
+                                dateTimeList = new List<ElementData>();
+                            dateTimeList.Add(i);
                             break;
                         case ElementTag.Month:
                             goto case ElementTag.Year;
@@ -93,56 +109,35 @@ namespace SheetPrintTool
                             goto case ElementTag.Year;
                         case ElementTag.Hour:
                             goto case ElementTag.Year;
-                        case ElementTag.Text:
-                            CreateTextBox(currentY, i, i.Key, TagText_TextChanged);
-                            currentY += ChangeY;
-                            break;
                     }
                 }
             }
             // 创建日期时间控件
-            if (dataDateTime != null)
-            {
-                var label = new Label()
-                {
-                    Location = new Point(LabelX, currentY),
-                    Text = ElementTag.寄件时间.ToString()
-                };
-                var date = new DateTimePicker()
-                {
-                    Location = new Point(ControlX, currentY),
-                    Format = DateTimePickerFormat.Custom,
-                    CustomFormat = "yyyy年MM月dd日HH时",
-                    ShowUpDown = true
-                };
-                date.ValueChanged += TagDate_TextChanged;
-                pInput.Controls.Add(label);
-                pInput.Controls.Add(date);
-            }
+            if (dateTimeList != null)
+                CreateTagDate(currentY);
             // 防止因为滚动出现，导致宽度减小，同时在Anchor作用下导致TextBox宽度减小
-            foreach (var i in pInput.Controls)
+            foreach (Control i in pInput.Controls)
             {
-                var tb = i as TextBox;
-                if (tb != null)
-                    tb.Anchor = TextBoxAnchor;
+                if (i is TextBox)
+                    i.Anchor = TextBoxAnchor;
             }
         }
 
         /// <summary>
         /// 创建 Label 和 TextBox
         /// </summary>
-        private void CreateTextBox(int currentY, ElementData e, object id, EventHandler textChanged)
+        private void CreateTextBox(int currentY, ElementData e, object tag, EventHandler textChanged)
         {
             var label = new Label()
             {
                 Location = new Point(LabelX, currentY),
-                Text = id.ToString()
+                Text = tag.ToString()
             };
             var textBox = new TextBox()
             {
                 Location = new Point(ControlX, currentY),
                 Width = ControlWidth,
-                Tag = id,
+                Tag = tag,
                 Text = e.Value
             };
             textBox.TextChanged += textChanged;
@@ -151,7 +146,31 @@ namespace SheetPrintTool
         }
 
         /// <summary>
-        /// 预制元素字段的 TextChanged 事件
+        /// 创建特殊类型控件
+        /// </summary>
+        /// <param name="y">y 坐标</param>
+        /// <param name="d">元素数据</param>
+        private void CreateTag200to400(int y, ElementData d)
+        {
+            var label = new Label()
+            {
+                Location = new Point(LabelX, y),
+                Text = d.Tag.ToString()
+            };
+            var textBox = new TextBox()
+            {
+                Location = new Point(ControlX, y),
+                Width = ControlWidth,
+                Tag = d.Tag,
+                Text = d.Value
+            };
+            textBox.TextChanged += Tag200to400_TextChanged;
+            pInput.Controls.Add(label);
+            pInput.Controls.Add(textBox);
+        }
+
+        /// <summary>
+        /// 特殊类型的 TextChanged 事件
         /// </summary>
         private void Tag200to400_TextChanged(object sender, EventArgs e)
         {
@@ -160,6 +179,30 @@ namespace SheetPrintTool
             var element = data.ElementList.Find(obj => obj.Tag == tag);
             element.Value = tb.Text;
             print.RefreshPreview();
+        }
+
+        /// <summary>
+        /// 创建 Tag.Text 控件
+        /// </summary>
+        /// <param name="y">y 坐标</param>
+        /// <param name="d">元素数据</param>
+        private void CreateTagText(int y, ElementData d)
+        {
+            var label = new Label()
+            {
+                Location = new Point(LabelX, y),
+                Text = d.Key.ToString()
+            };
+            var textBox = new TextBox()
+            {
+                Location = new Point(ControlX, y),
+                Width = ControlWidth,
+                Tag = d.Key,
+                Text = d.Value
+            };
+            textBox.TextChanged += TagText_TextChanged;
+            pInput.Controls.Add(label);
+            pInput.Controls.Add(textBox);
         }
 
         /// <summary>
@@ -175,12 +218,36 @@ namespace SheetPrintTool
         }
 
         /// <summary>
+        /// 创建 日期时间 控件
+        /// </summary>
+        /// <param name="y">y 坐标</param>
+        private void CreateTagDate(int y)
+        {
+            var label = new Label()
+            {
+                Location = new Point(LabelX, y),
+                Text = ElementTag.寄件时间.ToString()
+            };
+            var date = new DateTimePicker()
+            {
+                Location = new Point(ControlX, y),
+                Format = DateTimePickerFormat.Custom,
+                CustomFormat = "yyyy年MM月dd日HH时",
+                ShowUpDown = true
+            };
+            date.ValueChanged += TagDate_TextChanged;
+            TagDate_TextChanged(date, new EventArgs());
+            pInput.Controls.Add(label);
+            pInput.Controls.Add(date);
+        }
+
+        /// <summary>
         /// Tag.Year Month Day Hour 的 TextChanged 事件
         /// </summary>
         private void TagDate_TextChanged(object sender, EventArgs e)
         {
             var dtp = sender as DateTimePicker;
-            foreach (var i in dataDateTime)
+            foreach (var i in dateTimeList)
             {
                 switch (i.Tag)
                 {

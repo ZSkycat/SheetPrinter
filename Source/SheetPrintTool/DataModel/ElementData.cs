@@ -13,19 +13,19 @@ namespace SheetPrintTool.DataModel
         /// <summary>
         /// X坐标
         /// </summary>
-        public float X { get; set; }
+        public float X { get; set; } = 0;
         /// <summary>
         /// Y坐标
         /// </summary>
-        public float Y { get; set; }
+        public float Y { get; set; } = 0;
         /// <summary>
         /// 宽度
         /// </summary>
-        public float Width { get; set; }
+        public float Width { get; set; } = 0;
         /// <summary>
         /// 高度
         /// </summary>
-        public float Height { get; set; }
+        public float Height { get; set; } = 0;
         /// <summary>
         /// 元素类型
         /// </summary>

@@ -1,4 +1,22 @@
 ﻿{
+  "InfoList": [
+    {
+      "Name": "测试A",
+      "ElementData": {
+        "寄件人姓名": "测试A"
+      }
+    }, {
+      "Name": "测试B",
+      "ElementData": {
+        "寄件人姓名": "测试B"
+      }
+    }, {
+      "Name": "测试C",
+      "ElementData": {
+        "寄件人姓名": "测试C"
+      }
+    }
+  ],
   "InputModeIndex": 0,
-  "Font": "黑体, 12pt"
+  "Font": "黑体, 12pt, style=Bold"
 }

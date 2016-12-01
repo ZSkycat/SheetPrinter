@@ -1,13 +1,7 @@
 ﻿using SheetPrintTool.DataModel;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace SheetPrintTool
 {
@@ -24,6 +18,7 @@ namespace SheetPrintTool
             Graphics g = CreateGraphics();
             Global.DpiX = g.DpiX;
             Global.DpiY = g.DpiY;
+
             // 初始化数据录入模式
             for (var i = 0; true; i++)
             {
@@ -33,12 +28,11 @@ namespace SheetPrintTool
                     break;
             }
             cbInputMode.SelectedIndex = Global.Config.InputModeIndex;
-            // 初始模版列表
+
+            // 初始化模版列表
+            lbTemplate.DataSource = Global.TemplateList;
             lbTemplate.DisplayMember = "Name";
-            foreach (var i in Global.TemplateList)
-            {
-                lbTemplate.Items.Add(i);
-            }
+            lbTemplate.SelectedIndex = -1;
         }
 
         private void toolStripMenuItem字体配置_Click(object sender, EventArgs e)
@@ -54,6 +48,12 @@ namespace SheetPrintTool
                 Global.Config.Font = dialog.Font;
                 Global.SaveConfig();
             }
+        }
+
+        private void toolStripMenuItem信息管理_Click(object sender, EventArgs e)
+        {
+            var form = new FormInfoManage();
+            form.ShowDialog(this);
         }
 
         private void lbTemplate_MouseDoubleClick(object sender, MouseEventArgs e)

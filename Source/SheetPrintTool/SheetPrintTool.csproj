@@ -51,8 +51,14 @@
     <Compile Include="Core\PrintControl.cs" />
     <Compile Include="DataModel\ConfigData.cs" />
     <Compile Include="DataModel\ElementData.cs" />
-    <Compile Include="DataModel\SenderInfoData.cs" />
+    <Compile Include="DataModel\InfoData.cs" />
     <Compile Include="DataModel\TemplateData.cs" />
+    <Compile Include="FormInputTaobao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInputTaobao.Designer.cs">
+      <DependentUpon>FormInputTaobao.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,9 +71,21 @@
     <Compile Include="FormInputCommon.Designer.cs">
       <DependentUpon>FormInputCommon.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormInfoManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInfoManage.Designer.cs">
+      <DependentUpon>FormInfoManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormInfoManage.resx">
+      <DependentUpon>FormInfoManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInputTaobao.resx">
+      <DependentUpon>FormInputTaobao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

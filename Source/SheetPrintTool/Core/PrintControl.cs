@@ -1,38 +1,42 @@
 ﻿using SheetPrintTool.DataModel;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using static SheetPrintTool.Core.UnitlHelper;
 
 namespace SheetPrintTool.Core
 {
+    /// <summary>
+    /// 打印预览控制器
+    /// </summary>
     public class PrintControl
     {
         List<TemplateData> dataList;
-        TemplateData data;
+        // 预览功能数据
         Image image;
-
         Panel previewContainer;
         Panel preview;
+        int previewIndex;
+        // 打印功能数据
+        int printIndex;
 
         /// <summary>
-        /// 实例化打印控制器
+        /// 实例化打印预览控制器
         /// </summary>
         /// <param name="data">模版数据</param>
         public PrintControl(TemplateData data)
         {
-            this.data = data;
-            //!!!
-            image = Image.FromFile($@"{Global.TemplatePath}\{data.BackgroundFileName}");
+            dataList = new List<TemplateData>();
+            dataList.Add(data);
         }
-
+        /// <summary>
+        /// 实例化打印预览控制器
+        /// </summary>
+        /// <param name="datalist">模版数据列表</param>
         public PrintControl(List<TemplateData> datalist)
         {
-
+            this.dataList = datalist;
         }
 
         #region 预览功能
@@ -40,17 +44,33 @@ namespace SheetPrintTool.Core
         /// 初始化预览面板
         /// </summary>
         /// <param name="container">Panel 容器</param>
-        public void InitPreview(Panel container)
+        /// <param name="index">数据索引</param>
+        public void InitPreview(Panel container, int index = 0)
         {
-            container.AutoScroll = true;
             previewContainer = container;
+            previewIndex = index;
+            var data = dataList[previewIndex];
+            try
+            {
+                image = Image.FromFile($@"{Global.TemplatePath}\{data.BackgroundFileName}");
+            }
+            catch { }
             preview = new Panel()
             {
-                Width = Convert.ToInt32(MmToPxAtDpi(data.Width, Global.DpiX)),
-                Height = Convert.ToInt32(MmToPxAtDpi(data.Height, Global.DpiY))
+                Width = MmToPx(data.Width, Global.DpiX),
+                Height = MmToPx(data.Height, Global.DpiY)
             };
+            preview.Paint += (sender, e) => { DrawPreview(e.Graphics); };
+            previewContainer.AutoScroll = true;
             previewContainer.Controls.Add(preview);
-            preview.Paint += (sender, e) => { Preview(e.Graphics); };
+        }
+
+        public void SetPreview(int index)
+        {
+            previewIndex = index;
+            var data = dataList[previewIndex];
+            preview.Width = MmToPx(data.Width, Global.DpiX);
+            preview.Height = MmToPx(data.Height, Global.DpiY);
         }
 
         /// <summary>
@@ -58,43 +78,73 @@ namespace SheetPrintTool.Core
         /// </summary>
         public void RefreshPreview()
         {
-            Preview(preview.CreateGraphics());
+            DrawPreview(preview.CreateGraphics());
         }
 
         /// <summary>
-        /// 生成预览图
+        /// 绘制预览图
         /// </summary>
         /// <param name="g">要绘制的 Graphics 对象</param>
-        private void Preview(Graphics g)
+        private void DrawPreview(Graphics g)
         {
-            g.DrawImage(image, new RectangleF(0f, 0f, MmToPxAtDpi(data.Width, 96), MmToPxAtDpi(data.Height, 96)), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+            var data = dataList[previewIndex];
+            try
+            {
+                g.DrawImage(image, new RectangleF(0f, 0f, MmToPx_f(data.Width, 96), MmToPx_f(data.Height, 96)), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+            }
+            catch { }
             foreach (var i in data.ElementList)
             {
-                g.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPxAtDpi(i.X, 96), MmToPxAtDpi(i.Y, 96), MmToPxAtDpi(i.Width, 96), MmToPxAtDpi(i.Height, 96)));
+                g.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPx_f(i.X, Global.DpiX), MmToPx_f(i.Y, Global.DpiY), MmToPx_f(i.Width, Global.DpiX), MmToPx_f(i.Height, Global.DpiY)));
             }
         }
         #endregion
 
         #region 打印功能
-        public void Print()
+        /// <summary>
+        /// 打印，指定数据索引，小于0则打印全部
+        /// </summary>
+        /// <param name="owner">所有者窗体</param>
+        /// <param name="index">数据索引，小于0表示全部</param>
+        public void Print(int index = 0)
         {
+            printIndex = index;
             var document = new PrintDocument();
             document.PrintPage += Document_PrintPage;
             var dialog = new PrintDialog()
             {
+                UseEXDialog = true,
+                AllowPrintToFile = false,
+                ShowNetwork = false,
                 Document = document
             };
-
-            if(dialog.ShowDialog() == DialogResult.OK)
+            // 打印设置和开始打印
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                document.Print();
+                if (printIndex < 0)
+                {
+                    for (var i = 0; i < dataList.Count; i++)
+                    {
+                        document.Print();
+                    }
+                }
+                else
+                {
+                    var data = dataList[printIndex];
+                    document.DefaultPageSettings.PaperSize = new PaperSize("Custom", MmToPrinterUnit(data.Width), MmToPrinterUnit(data.Height));
+                    document.Print();
+                }
             }
         }
 
         private void Document_PrintPage(object sender, PrintPageEventArgs e)
         {
-            // e.HasMorePages
-            throw new NotImplementedException();
+            var data = dataList[printIndex];
+            e.Graphics.PageUnit = GraphicsUnit.Display;
+            foreach (var i in data.ElementList)
+            {
+                e.Graphics.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPrinterUnit_f(i.X), MmToPrinterUnit_f(i.Y), MmToPrinterUnit_f(i.Width), MmToPrinterUnit_f(i.Height)));
+            }
         }
         #endregion
     }

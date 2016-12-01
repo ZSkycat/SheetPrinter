@@ -38,6 +38,7 @@
             this.toolStripButton清空输入 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton添加任务 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton直接打印 = new System.Windows.Forms.ToolStripButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.pInput.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             this.pInput.AutoScroll = true;
             this.pInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pInput.Controls.Add(this.cbSelectSender);
+            this.pInput.Controls.Add(this.label3);
             this.pInput.Location = new System.Drawing.Point(5, 55);
             this.pInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pInput.Name = "pInput";
@@ -59,12 +61,11 @@
             // 
             this.cbSelectSender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSelectSender.FormattingEnabled = true;
-            this.cbSelectSender.Items.AddRange(new object[] {
-            "点击填充寄件人"});
             this.cbSelectSender.Location = new System.Drawing.Point(10, 10);
             this.cbSelectSender.Name = "cbSelectSender";
-            this.cbSelectSender.Size = new System.Drawing.Size(140, 27);
+            this.cbSelectSender.Size = new System.Drawing.Size(200, 27);
             this.cbSelectSender.TabIndex = 0;
+            this.cbSelectSender.SelectedIndexChanged += new System.EventHandler(this.cbSelectSender_SelectedIndexChanged);
             // 
             // pPreview
             // 
@@ -141,6 +142,15 @@
             this.toolStripButton直接打印.Text = "直接打印";
             this.toolStripButton直接打印.Click += new System.EventHandler(this.toolStripButton直接打印_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(205, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(126, 19);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "（选择要填充信息）";
+            // 
             // FormInputCommon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -156,9 +166,10 @@
             this.MinimumSize = new System.Drawing.Size(626, 629);
             this.Name = "FormInputCommon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "数据输入 - 通用编辑模式";
+            this.Text = "数据录入 - 通用编辑模式";
             this.Load += new System.EventHandler(this.FormInputCommon_Load);
             this.pInput.ResumeLayout(false);
+            this.pInput.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -176,5 +187,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton添加任务;
         private System.Windows.Forms.ToolStripButton toolStripButton直接打印;
         private System.Windows.Forms.ComboBox cbSelectSender;
+        private System.Windows.Forms.Label label3;
     }
 }

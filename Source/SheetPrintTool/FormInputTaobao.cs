@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SheetPrintTool.Core;
+using SheetPrintTool.DataModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,9 +13,19 @@ namespace SheetPrintTool
 {
     public partial class FormInputTaobao : Form
     {
-        public FormInputTaobao()
+        TemplateData data;
+        PrintControl print;
+
+        public FormInputTaobao(TemplateData data)
         {
             InitializeComponent();
+            this.data = data;
+        }
+
+        private void FormInputTaobao_Load(object sender, EventArgs e)
+        {
+            print = new PrintControl(data);
+            print.InitPreview(pPreview);
         }
     }
 }

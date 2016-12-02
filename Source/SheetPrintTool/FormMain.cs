@@ -77,6 +77,7 @@ namespace SheetPrintTool
                     new FormInputCommon(data).Show();
                     break;
                 case InputMode.淘宝物流格式:
+                    new FormInputTaobao(data).Show();
                     break;
             }
         }

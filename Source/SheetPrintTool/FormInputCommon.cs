@@ -67,7 +67,7 @@ namespace SheetPrintTool
         private void cbSelectSender_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 填充信息
-            if (cbSelectSender.SelectedIndex > 0)
+            if (cbSelectSender.SelectedIndex >= 0)
             {
                 foreach (var i in Global.Config.InfoList[cbSelectSender.SelectedIndex].ElementData)
                 {

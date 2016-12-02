@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInputCommon));
             this.pInput = new System.Windows.Forms.Panel();
             this.cbSelectSender = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.pPreview = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.toolStripButton清空输入 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton添加任务 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton直接打印 = new System.Windows.Forms.ToolStripButton();
-            this.label3 = new System.Windows.Forms.Label();
             this.pInput.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +66,15 @@
             this.cbSelectSender.Size = new System.Drawing.Size(200, 27);
             this.cbSelectSender.TabIndex = 0;
             this.cbSelectSender.SelectedIndexChanged += new System.EventHandler(this.cbSelectSender_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(205, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(126, 19);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "（选择要填充信息）";
             // 
             // pPreview
             // 
@@ -141,15 +150,6 @@
             this.toolStripButton直接打印.Size = new System.Drawing.Size(78, 25);
             this.toolStripButton直接打印.Text = "直接打印";
             this.toolStripButton直接打印.Click += new System.EventHandler(this.toolStripButton直接打印_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(205, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 19);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "（选择要填充信息）";
             // 
             // FormInputCommon
             // 

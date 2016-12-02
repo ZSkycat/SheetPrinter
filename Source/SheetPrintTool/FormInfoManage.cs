@@ -78,8 +78,9 @@ namespace SheetPrintTool
                 pInput.Controls.Find(InfoNameString, false)[0].Text = Global.Config.InfoList[CurrentInfoIndex].Name;
                 foreach (var i in Global.Config.InfoList[CurrentInfoIndex].ElementData)
                 {
-                    var control = pInput.Controls.Find(i.Key.ToString(), false)[0];
-                    control.Text = i.Value;
+                    Control[] controls = pInput.Controls.Find(i.Key.ToString(), false);
+                    if (controls.Length >= 1)
+                        controls[0].Text = i.Value;
                 }
             }
         }

@@ -13,6 +13,7 @@ namespace SheetPrintTool
         const int ChangeY = 30;
         const int LabelX = 10;
         const int ControlX = 150;
+        const int DateTimeCheckBoxX = 360;
         const int ControlWidth = 420;
         const AnchorStyles TextBoxAnchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
@@ -20,7 +21,8 @@ namespace SheetPrintTool
         PrintControl print;
         // Tag.Year Month Day Hour 数据
         List<ElementData> dateTimeList;
-        CheckBox cbDateTime;  //! 实现开关时间戳功能
+        DateTimePicker dateTimePicker;
+        CheckBox cbDateTime;
 
         public FormInputCommon(TemplateData data)
         {
@@ -64,9 +66,18 @@ namespace SheetPrintTool
 
         private void cbSelectSender_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbSelectSender.SelectedIndex = -1;
-
-            //! 实现填充功能
+            // 填充信息
+            if (cbSelectSender.SelectedIndex > 0)
+            {
+                foreach (var i in Global.Config.InfoList[cbSelectSender.SelectedIndex].ElementData)
+                {
+                    Control[] controls = pInput.Controls.Find(i.Key.ToString(), false);
+                    if (controls.Length >= 1)
+                        controls[0].Text = i.Value;
+                }
+                // 取消选中
+                cbSelectSender.SelectedIndex = -1;
+            }
         }
 
         /// <summary>
@@ -161,6 +172,7 @@ namespace SheetPrintTool
             {
                 Location = new Point(ControlX, y),
                 Width = ControlWidth,
+                Name = d.Tag.ToString(),
                 Tag = d.Tag,
                 Text = d.Value
             };
@@ -228,17 +240,25 @@ namespace SheetPrintTool
                 Location = new Point(LabelX, y),
                 Text = ElementTag.寄件时间.ToString()
             };
-            var date = new DateTimePicker()
+            dateTimePicker = new DateTimePicker()
             {
                 Location = new Point(ControlX, y),
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = "yyyy年MM月dd日HH时",
                 ShowUpDown = true
             };
-            date.ValueChanged += TagDate_TextChanged;
-            TagDate_TextChanged(date, new EventArgs());
+            cbDateTime = new CheckBox()
+            {
+                Location = new Point(DateTimeCheckBoxX, y),
+                Checked = true,
+                Text = "显示"
+            };
+            dateTimePicker.ValueChanged += TagDate_TextChanged;
+            cbDateTime.CheckedChanged += CbDateTime_CheckedChanged;
+            TagDate_TextChanged(dateTimePicker, new EventArgs());
             pInput.Controls.Add(label);
-            pInput.Controls.Add(date);
+            pInput.Controls.Add(dateTimePicker);
+            pInput.Controls.Add(cbDateTime);
         }
 
         /// <summary>
@@ -246,23 +266,43 @@ namespace SheetPrintTool
         /// </summary>
         private void TagDate_TextChanged(object sender, EventArgs e)
         {
-            var dtp = sender as DateTimePicker;
-            foreach (var i in dateTimeList)
+            if (cbDateTime.Checked)
             {
-                switch (i.Tag)
+                var dtp = sender as DateTimePicker;
+                foreach (var i in dateTimeList)
                 {
-                    case ElementTag.Year:
-                        i.Value = dtp.Value.Year.ToString();
-                        break;
-                    case ElementTag.Month:
-                        i.Value = dtp.Value.Month.ToString();
-                        break;
-                    case ElementTag.Day:
-                        i.Value = dtp.Value.Day.ToString();
-                        break;
-                    case ElementTag.Hour:
-                        i.Value = dtp.Value.Hour.ToString();
-                        break;
+                    switch (i.Tag)
+                    {
+                        case ElementTag.Year:
+                            i.Value = dtp.Value.Year.ToString();
+                            break;
+                        case ElementTag.Month:
+                            i.Value = dtp.Value.Month.ToString();
+                            break;
+                        case ElementTag.Day:
+                            i.Value = dtp.Value.Day.ToString();
+                            break;
+                        case ElementTag.Hour:
+                            i.Value = dtp.Value.Hour.ToString();
+                            break;
+                    }
+                }
+                print.RefreshPreview();
+            }
+        }
+
+        /// <summary>
+        /// Tag.Year Month Day Hour 的 CheckedChanged 事件
+        /// </summary>
+        private void CbDateTime_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDateTime.Checked)
+                TagDate_TextChanged(dateTimePicker, new EventArgs());
+            else
+            {
+                foreach (var i in dateTimeList)
+                {
+                    i.Value = "";
                 }
             }
             print.RefreshPreview();

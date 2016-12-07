@@ -21,6 +21,6 @@ namespace SheetPrintTool.DataModel
         /// <summary>
         /// 信息数据
         /// </summary>
-        public List<InfoData> InfoList = new List<InfoData>();
+        public List<InfoData> InfoList { get; set; } = new List<InfoData>();
     }
 }

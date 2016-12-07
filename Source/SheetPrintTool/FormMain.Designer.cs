@@ -151,14 +151,14 @@
             // toolStripMenuItem信息管理
             // 
             this.toolStripMenuItem信息管理.Name = "toolStripMenuItem信息管理";
-            this.toolStripMenuItem信息管理.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem信息管理.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem信息管理.Text = "信息管理";
             this.toolStripMenuItem信息管理.Click += new System.EventHandler(this.toolStripMenuItem信息管理_Click);
             // 
             // toolStripMenuItem字体配置
             // 
             this.toolStripMenuItem字体配置.Name = "toolStripMenuItem字体配置";
-            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem字体配置.Text = "字体配置";
             this.toolStripMenuItem字体配置.Click += new System.EventHandler(this.toolStripMenuItem字体配置_Click);
             // 
@@ -174,13 +174,13 @@
             // toolStripMenuItem打印
             // 
             this.toolStripMenuItem打印.Name = "toolStripMenuItem打印";
-            this.toolStripMenuItem打印.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem打印.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem打印.Text = "打印";
             // 
             // toolStripMenuItem清空
             // 
             this.toolStripMenuItem清空.Name = "toolStripMenuItem清空";
-            this.toolStripMenuItem清空.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem清空.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem清空.Text = "清空";
             // 
             // toolStripMenuItem关于
@@ -215,6 +215,7 @@
             this.MinimumSize = new System.Drawing.Size(632, 489);
             this.Name = "FormMain";
             this.Text = "物流单据打印工具";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

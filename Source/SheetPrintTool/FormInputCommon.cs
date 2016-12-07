@@ -9,20 +9,20 @@ namespace SheetPrintTool
 {
     public partial class FormInputCommon : Form
     {
-        const int InitY = 50;
-        const int ChangeY = 30;
-        const int LabelX = 10;
-        const int ControlX = 150;
-        const int DateTimeCheckBoxX = 360;
-        const int ControlWidth = 420;
-        const AnchorStyles TextBoxAnchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        private const int InitY = 50;
+        private const int ChangeY = 30;
+        private const int LabelX = 10;
+        private const int ControlX = 150;
+        private const int DateTimeCheckBoxX = 360;
+        private const int ControlWidth = 420;
+        private const AnchorStyles TextBoxAnchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
-        TemplateData data;
-        PrintControl print;
+        private TemplateData data;
+        private PrintControl print;
         // Tag.Year Month Day Hour 数据
-        List<ElementData> dateTimeList;
-        DateTimePicker dateTimePicker;
-        CheckBox cbDateTime;
+        private List<ElementData> dateTimeList;
+        private DateTimePicker dateTimePicker;
+        private CheckBox cbDateTime;
 
         public FormInputCommon(TemplateData data)
         {
@@ -67,28 +67,28 @@ namespace SheetPrintTool
         private void cbSelectSender_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 填充信息
-            if (cbSelectSender.SelectedIndex >= 0)
+            if (cbSelectInfo.SelectedIndex >= 0)
             {
-                foreach (var i in Global.Config.InfoList[cbSelectSender.SelectedIndex].ElementData)
+                foreach (var i in Global.Config.InfoList[cbSelectInfo.SelectedIndex].ElementData)
                 {
                     Control[] controls = pInput.Controls.Find(i.Key.ToString(), false);
                     if (controls.Length >= 1)
                         controls[0].Text = i.Value;
                 }
                 // 取消选中
-                cbSelectSender.SelectedIndex = -1;
+                cbSelectInfo.SelectedIndex = -1;
             }
         }
 
         /// <summary>
         /// 初始化输入面板
         /// </summary>
-        void InitInput()
+        private void InitInput()
         {
             // 填充信息功能
-            cbSelectSender.DataSource = Global.Config.InfoList;
-            cbSelectSender.DisplayMember = "Name";
-            cbSelectSender.SelectedIndex = -1;
+            cbSelectInfo.DataSource = Global.Config.InfoList;
+            cbSelectInfo.DisplayMember = "Name";
+            cbSelectInfo.SelectedIndex = -1;
 
             // 数据输入功能
             int currentY = InitY;
@@ -135,28 +135,6 @@ namespace SheetPrintTool
         }
 
         /// <summary>
-        /// 创建 Label 和 TextBox
-        /// </summary>
-        private void CreateTextBox(int currentY, ElementData e, object tag, EventHandler textChanged)
-        {
-            var label = new Label()
-            {
-                Location = new Point(LabelX, currentY),
-                Text = tag.ToString()
-            };
-            var textBox = new TextBox()
-            {
-                Location = new Point(ControlX, currentY),
-                Width = ControlWidth,
-                Tag = tag,
-                Text = e.Value
-            };
-            textBox.TextChanged += textChanged;
-            pInput.Controls.Add(label);
-            pInput.Controls.Add(textBox);
-        }
-
-        /// <summary>
         /// 创建特殊类型控件
         /// </summary>
         /// <param name="y">y 坐标</param>
@@ -173,7 +151,7 @@ namespace SheetPrintTool
                 Location = new Point(ControlX, y),
                 Width = ControlWidth,
                 Name = d.Tag.ToString(),
-                Tag = d.Tag,
+                Tag = d,
                 Text = d.Value
             };
             textBox.TextChanged += Tag200to400_TextChanged;
@@ -186,9 +164,8 @@ namespace SheetPrintTool
         /// </summary>
         private void Tag200to400_TextChanged(object sender, EventArgs e)
         {
-            var tb = sender as TextBox;
-            var tag = (ElementTag)tb.Tag;
-            var element = data.ElementList.Find(obj => obj.Tag == tag);
+            var tb = (TextBox)sender;
+            var element = (ElementData)tb.Tag;
             element.Value = tb.Text;
             print.RefreshPreview();
         }
@@ -209,7 +186,7 @@ namespace SheetPrintTool
             {
                 Location = new Point(ControlX, y),
                 Width = ControlWidth,
-                Tag = d.Key,
+                Tag = d,
                 Text = d.Value
             };
             textBox.TextChanged += TagText_TextChanged;
@@ -222,9 +199,8 @@ namespace SheetPrintTool
         /// </summary>
         private void TagText_TextChanged(object sender, EventArgs e)
         {
-            var tb = sender as TextBox;
-            var key = (string)tb.Tag;
-            var element = data.ElementList.Find(obj => obj.Key == key);
+            var tb = (TextBox)sender;
+            var element = (ElementData)tb.Tag;
             element.Value = tb.Text;
             print.RefreshPreview();
         }
@@ -255,7 +231,7 @@ namespace SheetPrintTool
             };
             dateTimePicker.ValueChanged += TagDate_TextChanged;
             cbDateTime.CheckedChanged += CbDateTime_CheckedChanged;
-            TagDate_TextChanged(dateTimePicker, new EventArgs());
+            TagDate_TextChanged(dateTimePicker, null);
             pInput.Controls.Add(label);
             pInput.Controls.Add(dateTimePicker);
             pInput.Controls.Add(cbDateTime);
@@ -268,7 +244,7 @@ namespace SheetPrintTool
         {
             if (cbDateTime.Checked)
             {
-                var dtp = sender as DateTimePicker;
+                var dtp = (DateTimePicker)sender;
                 foreach (var i in dateTimeList)
                 {
                     switch (i.Tag)

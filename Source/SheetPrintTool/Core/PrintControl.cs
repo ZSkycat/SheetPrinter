@@ -12,14 +12,14 @@ namespace SheetPrintTool.Core
     /// </summary>
     public class PrintControl
     {
-        List<TemplateData> dataList;
+        private List<TemplateData> dataList;
         // 预览功能数据
-        Image image;
-        Panel previewContainer;
-        Panel preview;
-        int previewIndex;
+        private Image image;
+        private Panel previewContainer;
+        private Panel preview;
+        private int previewIndex;
         // 打印功能数据
-        int printIndex;
+        private int printIndex;
 
         /// <summary>
         /// 实例化打印预览控制器

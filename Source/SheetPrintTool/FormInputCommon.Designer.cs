@@ -30,17 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInputCommon));
             this.pInput = new System.Windows.Forms.Panel();
-            this.cbSelectSender = new System.Windows.Forms.ComboBox();
+            this.cbSelectInfo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pPreview = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton清空输入 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton添加任务 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton直接打印 = new System.Windows.Forms.ToolStripButton();
             this.pInput.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // pInput
@@ -49,7 +49,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pInput.AutoScroll = true;
             this.pInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pInput.Controls.Add(this.cbSelectSender);
+            this.pInput.Controls.Add(this.cbSelectInfo);
             this.pInput.Controls.Add(this.label3);
             this.pInput.Location = new System.Drawing.Point(5, 55);
             this.pInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -57,15 +57,15 @@
             this.pInput.Size = new System.Drawing.Size(600, 200);
             this.pInput.TabIndex = 3;
             // 
-            // cbSelectSender
+            // cbSelectInfo
             // 
-            this.cbSelectSender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSelectSender.FormattingEnabled = true;
-            this.cbSelectSender.Location = new System.Drawing.Point(10, 10);
-            this.cbSelectSender.Name = "cbSelectSender";
-            this.cbSelectSender.Size = new System.Drawing.Size(200, 27);
-            this.cbSelectSender.TabIndex = 0;
-            this.cbSelectSender.SelectedIndexChanged += new System.EventHandler(this.cbSelectSender_SelectedIndexChanged);
+            this.cbSelectInfo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSelectInfo.FormattingEnabled = true;
+            this.cbSelectInfo.Location = new System.Drawing.Point(10, 10);
+            this.cbSelectInfo.Name = "cbSelectInfo";
+            this.cbSelectInfo.Size = new System.Drawing.Size(200, 27);
+            this.cbSelectInfo.TabIndex = 0;
+            this.cbSelectInfo.SelectedIndexChanged += new System.EventHandler(this.cbSelectSender_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -106,17 +106,17 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "模版预览";
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton清空输入,
             this.toolStripButton添加任务,
             this.toolStripButton直接打印});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(610, 28);
-            this.toolStrip1.TabIndex = 5;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(610, 28);
+            this.toolStrip.TabIndex = 5;
+            this.toolStrip.Text = "toolStrip1";
             // 
             // toolStripButton清空输入
             // 
@@ -156,7 +156,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 590);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pPreview);
@@ -170,8 +170,8 @@
             this.Load += new System.EventHandler(this.FormInputCommon_Load);
             this.pInput.ResumeLayout(false);
             this.pInput.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,11 +182,11 @@
         private System.Windows.Forms.Panel pPreview;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton清空输入;
         private System.Windows.Forms.ToolStripButton toolStripButton添加任务;
         private System.Windows.Forms.ToolStripButton toolStripButton直接打印;
-        private System.Windows.Forms.ComboBox cbSelectSender;
+        private System.Windows.Forms.ComboBox cbSelectInfo;
         private System.Windows.Forms.Label label3;
     }
 }

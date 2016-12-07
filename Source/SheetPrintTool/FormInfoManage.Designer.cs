@@ -35,6 +35,7 @@
             this.pInput = new System.Windows.Forms.Panel();
             this.bDelete = new System.Windows.Forms.Button();
             this.lState = new System.Windows.Forms.Label();
+            this.bNewCopy = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbInfo
@@ -51,7 +52,7 @@
             // 
             // bSave
             // 
-            this.bSave.Location = new System.Drawing.Point(180, 10);
+            this.bSave.Location = new System.Drawing.Point(265, 10);
             this.bSave.Name = "bSave";
             this.bSave.Size = new System.Drawing.Size(75, 30);
             this.bSave.TabIndex = 1;
@@ -109,6 +110,16 @@
             this.lState.TabIndex = 2;
             this.lState.Text = "新建:";
             // 
+            // bNewCopy
+            // 
+            this.bNewCopy.Location = new System.Drawing.Point(180, 10);
+            this.bNewCopy.Name = "bNewCopy";
+            this.bNewCopy.Size = new System.Drawing.Size(75, 30);
+            this.bNewCopy.TabIndex = 1;
+            this.bNewCopy.Text = "新建副本";
+            this.bNewCopy.UseVisualStyleBackColor = true;
+            this.bNewCopy.Click += new System.EventHandler(this.bNewCopy_Click);
+            // 
             // FormInfoManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -119,6 +130,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bNew);
             this.Controls.Add(this.bDelete);
+            this.Controls.Add(this.bNewCopy);
             this.Controls.Add(this.bSave);
             this.Controls.Add(this.lbInfo);
             this.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -142,5 +154,6 @@
         private System.Windows.Forms.Panel pInput;
         private System.Windows.Forms.Button bDelete;
         private System.Windows.Forms.Label lState;
+        private System.Windows.Forms.Button bNewCopy;
     }
 }

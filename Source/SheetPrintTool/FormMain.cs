@@ -35,6 +35,12 @@ namespace SheetPrintTool
             lbTemplate.SelectedIndex = -1;
         }
 
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Global.Config.InputModeIndex = cbInputMode.SelectedIndex;
+            Global.SaveConfig();
+        }
+
         private void toolStripMenuItem字体配置_Click(object sender, EventArgs e)
         {
             var dialog = new FontDialog()
@@ -76,7 +82,7 @@ namespace SheetPrintTool
                 case InputMode.通用编辑模式:
                     new FormInputCommon(data).Show();
                     break;
-                case InputMode.淘宝物流格式:
+                case InputMode.淘宝中国物流格式:
                     new FormInputTaobao(data).Show();
                     break;
             }

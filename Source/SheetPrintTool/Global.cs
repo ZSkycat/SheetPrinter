@@ -11,7 +11,7 @@ namespace SheetPrintTool
     {
         private const string ConfigPathName = "config";
 
-        public static ConfigData Config = new ConfigData();
+        public static ConfigData Config { get; set; } = new ConfigData();
         public static List<TemplateData> TemplateList { get; set; } = new List<TemplateData>();
 
         public static string TemplatePath { get; set; }
@@ -68,7 +68,7 @@ namespace SheetPrintTool
     public enum InputMode
     {
         通用编辑模式,
-        淘宝物流格式
+        淘宝中国物流格式
     }
 
     /// <summary>

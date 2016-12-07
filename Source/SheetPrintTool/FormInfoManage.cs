@@ -49,6 +49,11 @@ namespace SheetPrintTool
             ClearInput();
         }
 
+        private void bNewCopy_Click(object sender, EventArgs e)
+        {
+            CurrentInfoIndex = -1;
+        }
+
         private void bSave_Click(object sender, EventArgs e)
         {
             if (CurrentInfoIndex < 0)
@@ -72,9 +77,9 @@ namespace SheetPrintTool
             else
                 lState.Text = $"修改: [{CurrentInfoIndex}] {Global.Config.InfoList[CurrentInfoIndex].Name}";
             // 处理信息数据
-            ClearInput();
             if (CurrentInfoIndex >= 0)
             {
+                ClearInput();
                 pInput.Controls.Find(InfoNameString, false)[0].Text = Global.Config.InfoList[CurrentInfoIndex].Name;
                 foreach (var i in Global.Config.InfoList[CurrentInfoIndex].ElementData)
                 {
@@ -133,6 +138,7 @@ namespace SheetPrintTool
             lbInfo.DataSource = Global.Config.InfoList;
             lbInfo.DisplayMember = "Name";
             lbInfo.SelectedIndex = -1;
+            ClearInput();
         }
 
         /// <summary>

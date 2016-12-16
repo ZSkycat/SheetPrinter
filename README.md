@@ -6,4 +6,4 @@
 * Tag 由 ElementTag 规定
 
 # License
-The license of the repositories is [MIT License](https://github.com/ZSkycat/SheetPrintTool/blob/master/LICENSE).
+Licensed under the [MIT License](https://github.com/ZSkycat/SheetPrintTool/blob/master/LICENSE).

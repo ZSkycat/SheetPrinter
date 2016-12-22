@@ -53,6 +53,12 @@
     <Compile Include="DataModel\ElementData.cs" />
     <Compile Include="DataModel\InfoData.cs" />
     <Compile Include="DataModel\TemplateData.cs" />
+    <Compile Include="FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormInputTaobao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormInfoManage.resx">
       <DependentUpon>FormInfoManage.cs</DependentUpon>
     </EmbeddedResource>

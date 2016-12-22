@@ -36,7 +36,7 @@ namespace SheetPrintTool.Core
         /// <param name="datalist">模版数据列表</param>
         public PrintControl(List<TemplateData> datalist)
         {
-            this.dataList = datalist;
+            dataList = datalist;
         }
 
         #region 预览功能
@@ -125,6 +125,9 @@ namespace SheetPrintTool.Core
                 {
                     for (var i = 0; i < dataList.Count; i++)
                     {
+                        printIndex = i;
+                        var data = dataList[printIndex];
+                        document.DefaultPageSettings.PaperSize = new PaperSize("Custom", MmToPrinterUnit(data.Width), MmToPrinterUnit(data.Height));
                         document.Print();
                     }
                 }

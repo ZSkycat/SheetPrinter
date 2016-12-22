@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbInputMode = new System.Windows.Forms.ComboBox();
             this.lbTemplate = new System.Windows.Forms.ListBox();
             this.lvTaskList = new System.Windows.Forms.ListView();
+            this.menuTaskItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripMenuItem配置 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem信息管理 = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +50,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.menuTaskItem.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,11 +129,39 @@
             this.lvTaskList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvTaskList.ContextMenuStrip = this.menuTaskItem;
+            this.lvTaskList.FullRowSelect = true;
+            this.lvTaskList.GridLines = true;
+            this.lvTaskList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvTaskList.Location = new System.Drawing.Point(0, 30);
             this.lvTaskList.Name = "lvTaskList";
             this.lvTaskList.Size = new System.Drawing.Size(400, 355);
             this.lvTaskList.TabIndex = 0;
             this.lvTaskList.UseCompatibleStateImageBehavior = false;
+            this.lvTaskList.View = System.Windows.Forms.View.Details;
+            // 
+            // menuTaskItem
+            // 
+            this.menuTaskItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.编辑ToolStripMenuItem,
+            this.删除ToolStripMenuItem});
+            this.menuTaskItem.Name = "menuTaskItem";
+            this.menuTaskItem.Size = new System.Drawing.Size(101, 48);
+            this.menuTaskItem.Opening += new System.ComponentModel.CancelEventHandler(this.menuTaskItem_Opening);
+            // 
+            // 编辑ToolStripMenuItem
+            // 
+            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
+            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.编辑ToolStripMenuItem.Text = "编辑";
+            this.编辑ToolStripMenuItem.Click += new System.EventHandler(this.编辑ToolStripMenuItem_Click);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
             // label3
             // 
@@ -176,18 +209,21 @@
             this.toolStripMenuItem打印.Name = "toolStripMenuItem打印";
             this.toolStripMenuItem打印.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem打印.Text = "打印";
+            this.toolStripMenuItem打印.Click += new System.EventHandler(this.toolStripMenuItem打印_Click);
             // 
             // toolStripMenuItem清空
             // 
             this.toolStripMenuItem清空.Name = "toolStripMenuItem清空";
             this.toolStripMenuItem清空.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem清空.Text = "清空";
+            this.toolStripMenuItem清空.Click += new System.EventHandler(this.toolStripMenuItem清空_Click);
             // 
             // toolStripMenuItem关于
             // 
             this.toolStripMenuItem关于.Name = "toolStripMenuItem关于";
             this.toolStripMenuItem关于.Size = new System.Drawing.Size(44, 21);
             this.toolStripMenuItem关于.Text = "关于";
+            this.toolStripMenuItem关于.Click += new System.EventHandler(this.toolStripMenuItem关于_Click);
             // 
             // menuStrip
             // 
@@ -215,6 +251,7 @@
             this.MinimumSize = new System.Drawing.Size(632, 489);
             this.Name = "FormMain";
             this.Text = "物流单据打印工具";
+            this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -222,6 +259,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
+            this.menuTaskItem.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -245,6 +283,9 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem清空;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem关于;
         private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ContextMenuStrip menuTaskItem;
+        private System.Windows.Forms.ToolStripMenuItem 编辑ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
     }
 }
 

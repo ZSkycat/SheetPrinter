@@ -56,7 +56,8 @@ namespace SheetPrintTool
 
         private void toolStripButton添加任务_Click(object sender, EventArgs e)
         {
-
+            Global.AddTask(data);
+            Close();
         }
 
         private void toolStripButton直接打印_Click(object sender, EventArgs e)

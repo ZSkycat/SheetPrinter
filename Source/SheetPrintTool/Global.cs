@@ -11,8 +11,10 @@ namespace SheetPrintTool
     {
         private const string ConfigPathName = "config";
 
-        public static ConfigData Config { get; set; } = new ConfigData();
-        public static List<TemplateData> TemplateList { get; set; } = new List<TemplateData>();
+        public static ConfigData config = new ConfigData();
+        public static ConfigData Config { get { return config; } }
+        public static List<TemplateData> TemplateList { get; } = new List<TemplateData>();
+        public static List<TemplateData> TaskDataList { get; } = new List<TemplateData>();
 
         public static string TemplatePath { get; set; }
         public static float DpiX { get; set; }
@@ -34,7 +36,7 @@ namespace SheetPrintTool
         public static void LoadConfig()
         {
             var json = File.ReadAllText(ConfigPathName, Encoding.UTF8);
-            Config = JsonConvert.DeserializeObject<ConfigData>(json);
+            config = JsonConvert.DeserializeObject<ConfigData>(json);
         }
 
         /// <summary>
@@ -59,6 +61,12 @@ namespace SheetPrintTool
         {
             var json = JsonConvert.SerializeObject(Config);
             File.WriteAllText(ConfigPathName, json, Encoding.UTF8);
+        }
+
+        public static void AddTask(TemplateData data)
+        {
+            if(!TaskDataList.Contains(data))
+                TaskDataList.Add(data);
         }
     }
 

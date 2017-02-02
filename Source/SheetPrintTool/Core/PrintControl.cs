@@ -90,7 +90,7 @@ namespace SheetPrintTool.Core
             var data = dataList[previewIndex];
             try
             {
-                g.DrawImage(image, new RectangleF(0f, 0f, MmToPx_f(data.Width, 96), MmToPx_f(data.Height, 96)), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+                g.DrawImage(image, new RectangleF(0f, 0f, MmToPx_f(data.Width, Global.DpiX), MmToPx_f(data.Height, Global.DpiY)), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
             }
             catch { }
             foreach (var i in data.ElementList)
@@ -146,7 +146,7 @@ namespace SheetPrintTool.Core
             e.Graphics.PageUnit = GraphicsUnit.Display;
             foreach (var i in data.ElementList)
             {
-                e.Graphics.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPrinterUnit_f(i.X), MmToPrinterUnit_f(i.Y), MmToPrinterUnit_f(i.Width), MmToPrinterUnit_f(i.Height)));
+                e.Graphics.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPrinterUnit_f(i.X + data.OffsetX), MmToPrinterUnit_f(i.Y + data.OffsetY), MmToPrinterUnit_f(i.Width), MmToPrinterUnit_f(i.Height)));
             }
         }
         #endregion

@@ -24,14 +24,22 @@ namespace SheetPrintTool.DataModel
         /// </summary>
         public float Height { get; set; }
         /// <summary>
+        /// 打印机偏移 X
+        /// </summary>
+        public float OffsetX { get; set; } = 0;
+        /// <summary>
+        /// 打印机偏移 Y
+        /// </summary>
+        public float OffsetY { get; set; } = 0;
+        /// <summary>
         /// 背景图名称
         /// </summary>
         public string BackgroundFileName { get; set; }
         /// <summary>
         /// 元素列表
         /// </summary>
-        public List<ElementData> ElementList { get; set; }
-        
+        public List<ElementData> ElementList { get; set; } = new List<ElementData>();
+
         /// <summary>
         /// 克隆对象
         /// </summary>

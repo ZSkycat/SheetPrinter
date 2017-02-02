@@ -11,7 +11,7 @@
 
 ## 模版配置
 模版文件位置在 .\Template\  
-属性 Width, Height, X, Y 的单位是 mm  
+属性 Width, Height, OffsetX, OffsetY, X, Y 的单位是 mm  
 属性 Tag 由 ElementTag 规定
 
 ## 依赖

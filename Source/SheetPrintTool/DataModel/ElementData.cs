@@ -34,10 +34,10 @@ namespace SheetPrintTool.DataModel
         /// <summary>
         /// 元素名称
         /// </summary>
-        public string Key { get; set; }
+        public string Key { get; set; } = "";
         /// <summary>
         /// 元素内容
         /// </summary>
-        public string Value { get; set; }
+        public string Value { get; set; } = "";
     }
 }

@@ -120,7 +120,7 @@
             this.lbTemplate.Location = new System.Drawing.Point(10, 85);
             this.lbTemplate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lbTemplate.Name = "lbTemplate";
-            this.lbTemplate.Size = new System.Drawing.Size(190, 289);
+            this.lbTemplate.Size = new System.Drawing.Size(190, 327);
             this.lbTemplate.TabIndex = 0;
             this.lbTemplate.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbTemplate_MouseDoubleClick);
             // 
@@ -135,7 +135,7 @@
             this.lvTaskList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvTaskList.Location = new System.Drawing.Point(0, 30);
             this.lvTaskList.Name = "lvTaskList";
-            this.lvTaskList.Size = new System.Drawing.Size(400, 355);
+            this.lvTaskList.Size = new System.Drawing.Size(400, 383);
             this.lvTaskList.TabIndex = 0;
             this.lvTaskList.UseCompatibleStateImageBehavior = false;
             this.lvTaskList.View = System.Windows.Forms.View.Details;

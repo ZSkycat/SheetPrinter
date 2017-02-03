@@ -15,15 +15,15 @@ namespace SheetPrintTool.Core
         /// </summary>
         public static int MmToPrinterUnit(float mm)
         {
-            return Convert.ToInt32(Math.Round(mm / 25.4d * 100));
+            return Convert.ToInt32(Math.Round(mm / 25.4f * 100f));
         }
 
         /// <summary>
         /// 将毫米转为打印机单位
         /// </summary>
-        public static int MmToPrinterUnit_f(float mm)
+        public static float MmToPrinterUnit_f(float mm)
         {
-            return Convert.ToInt32(Math.Round(mm / 25.4d * 100));
+            return mm / 25.4f * 100f;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace SheetPrintTool.Core
         /// </summary>
         public static int MmToPx(float mm, float dpi)
         {
-            return Convert.ToInt32(Math.Round(mm / 10d * dpi / 2.54d));
+            return Convert.ToInt32(Math.Round(mm / 10f * dpi / 2.54f));
         }
 
         /// <summary>

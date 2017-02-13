@@ -37,6 +37,7 @@
             this.toolStripButton直接打印 = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
             this.pInput = new System.Windows.Forms.Panel();
+            this.lState = new System.Windows.Forms.Label();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.tbResName = new System.Windows.Forms.TextBox();
             this.cbDateTime = new System.Windows.Forms.CheckBox();
@@ -46,7 +47,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lState = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             this.pInput.SuspendLayout();
             this.SuspendLayout();
@@ -148,10 +148,22 @@
             this.pInput.Size = new System.Drawing.Size(600, 205);
             this.pInput.TabIndex = 8;
             // 
+            // lState
+            // 
+            this.lState.AutoSize = true;
+            this.lState.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lState.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lState.ForeColor = System.Drawing.Color.Red;
+            this.lState.Location = new System.Drawing.Point(10, 70);
+            this.lState.Name = "lState";
+            this.lState.Size = new System.Drawing.Size(61, 19);
+            this.lState.TabIndex = 7;
+            this.lState.Text = "格式错误";
+            this.lState.Click += new System.EventHandler(this.lState_Click);
+            // 
             // dateTimePicker
             // 
             this.dateTimePicker.CustomFormat = "yyyy年MM月dd日HH时";
-            this.dateTimePicker.Enabled = false;
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker.Location = new System.Drawing.Point(120, 170);
             this.dateTimePicker.Name = "dateTimePicker";
@@ -239,19 +251,6 @@
             this.label3.Size = new System.Drawing.Size(87, 19);
             this.label3.TabIndex = 0;
             this.label3.Text = "使用信息模版";
-            // 
-            // lState
-            // 
-            this.lState.AutoSize = true;
-            this.lState.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lState.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lState.ForeColor = System.Drawing.Color.Red;
-            this.lState.Location = new System.Drawing.Point(10, 70);
-            this.lState.Name = "lState";
-            this.lState.Size = new System.Drawing.Size(61, 19);
-            this.lState.TabIndex = 7;
-            this.lState.Text = "格式错误";
-            this.lState.Click += new System.EventHandler(this.lState_Click);
             // 
             // FormInputTaobao
             // 

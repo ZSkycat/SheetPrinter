@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SheetPrintTool.Core
+namespace SheetPrinter.Core
 {
     /// <summary>
     /// 单位转换工具

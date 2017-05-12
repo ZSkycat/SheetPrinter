@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using SheetPrintTool.DataModel;
+using SheetPrinter.DataModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SheetPrintTool
+namespace SheetPrinter
 {
     public static class Global
     {

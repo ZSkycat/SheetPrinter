@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace SheetPrintTool
+namespace SheetPrinter
 {
     static class Program
     {

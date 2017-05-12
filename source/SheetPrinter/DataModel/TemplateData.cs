@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace SheetPrintTool.DataModel
+namespace SheetPrinter.DataModel
 {
     /// <summary>
     /// 模板数据模型

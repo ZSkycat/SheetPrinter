@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SheetPrintTool.DataModel
+namespace SheetPrinter.DataModel
 {
     /// <summary>
     /// 信息数据模型

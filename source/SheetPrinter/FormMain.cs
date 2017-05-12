@@ -1,11 +1,11 @@
-﻿using SheetPrintTool.Core;
-using SheetPrintTool.DataModel;
+﻿using SheetPrinter.Core;
+using SheetPrinter.DataModel;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SheetPrintTool
+namespace SheetPrinter
 {
     public partial class FormMain : Form
     {

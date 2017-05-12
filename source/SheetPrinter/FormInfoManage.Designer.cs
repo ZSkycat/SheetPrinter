@@ -1,4 +1,4 @@
-﻿namespace SheetPrintTool
+﻿namespace SheetPrinter
 {
     partial class FormInfoManage
     {

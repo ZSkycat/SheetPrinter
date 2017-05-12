@@ -1,11 +1,11 @@
-﻿using SheetPrintTool.DataModel;
+﻿using SheetPrinter.DataModel;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
-using static SheetPrintTool.Core.UnitlHelper;
+using static SheetPrinter.Core.UnitlHelper;
 
-namespace SheetPrintTool.Core
+namespace SheetPrinter.Core
 {
     /// <summary>
     /// 打印预览控制器

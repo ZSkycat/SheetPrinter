@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using System;
 
-namespace SheetPrintTool.DataModel
+namespace SheetPrinter.DataModel
 {
     /// <summary>
     /// 元素数据模型

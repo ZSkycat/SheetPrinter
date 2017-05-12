@@ -1,9 +1,9 @@
-﻿using SheetPrintTool.DataModel;
+﻿using SheetPrinter.DataModel;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SheetPrintTool
+namespace SheetPrinter
 {
     public partial class FormInfoManage : Form
     {

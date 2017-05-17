@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>7c115c73-0d64-49f8-b282-d2933b321c1e</ProjectGuid>
+    <ProjectGuid>{7C115C73-0D64-49F8-B282-D2933B321C1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SheetPrinter.Core</RootNamespace>
@@ -30,20 +30,43 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ElementType.cs" />
+    <Compile Include="Form\SheetPreview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\SheetPreview.Designer.cs">
+      <DependentUpon>SheetPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IMode.cs" />
+    <Compile Include="IPlugin.cs" />
+    <Compile Include="Model\ConfigModel.cs" />
+    <Compile Include="Model\ElementModel.cs" />
+    <Compile Include="Model\TaskInfoModel.cs" />
+    <Compile Include="Model\TemplateModel.cs" />
+    <Compile Include="PrintController.cs" />
+    <Compile Include="ProgramData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskController.cs" />
+    <Compile Include="UnitConvert.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form\SheetPreview.resx">
+      <DependentUpon>SheetPreview.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>

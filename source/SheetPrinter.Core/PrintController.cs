@@ -81,7 +81,9 @@ namespace SheetPrinter.Core
         /// <summary>
         /// 根据 FontSize 计算生成新的字体
         /// </summary>
-        private Font CalcFont(Font font, float fontSize)
+        /// <param name="font">字体原型</param>
+        /// <param name="fontSize">字体大小，大于0单位是磅，小于0是相对倍数，0=程序配置值</param>
+        public static Font CalcFont(Font font, float fontSize)
         {
             if (fontSize == 0)
             {

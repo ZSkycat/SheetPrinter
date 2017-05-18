@@ -9,7 +9,7 @@ namespace SheetPrinter.Core
         /// <summary>
         /// 任务队列数据列表
         /// </summary>
-        public static List<TaskInfoModel> TaskList { get; set; } = new List<TaskInfoModel>();
+        public static List<TaskInfoModel> TaskList { get; } = new List<TaskInfoModel>();
 
         /// <summary>
         /// 添加到任务队列

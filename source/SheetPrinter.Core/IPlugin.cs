@@ -1,4 +1,6 @@
-﻿namespace SheetPrinter.Core
+﻿using System;
+
+namespace SheetPrinter.Core
 {
     /// <summary>
     /// 定义插件的主入口
@@ -16,9 +18,9 @@
         string[] ModeNameList { get; }
 
         /// <summary>
-        /// 类型全名列表，与模式名称列表按顺序对应
+        /// 类型列表，与模式名称列表按顺序对应
         /// </summary>
-        string[] TypeFullNameList { get; }
+        Type[] ModeTypeList { get; }
 
         /// <summary>
         /// 插件的主入口

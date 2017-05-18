@@ -68,28 +68,8 @@ namespace SheetPrinter.Core.Form
             }
             foreach (var i in data.ElementList)
             {
-                var font = CalcFont(ProgramData.Config.Font, i.FontSize);
+                var font = PrintController.CalcFont(ProgramData.Config.Font, i.FontSize);
                 g.DrawString(i.Value, font, Brushes.Black, new RectangleF(CmToPx(i.X, dpiX), CmToPx(i.Y, dpiY), CmToPx(i.Width, dpiX), CmToPx(i.Height, dpiY)));
-            }
-        }
-
-        /// <summary>
-        /// 根据 FontSize 计算生成新的字体
-        /// </summary>
-        private Font CalcFont(Font font, float fontSize)
-        {
-            if (fontSize == 0)
-            {
-                return font;
-            }
-            else if (fontSize > 0)
-            {
-                return new Font(font.FontFamily, fontSize, font.Style, GraphicsUnit.Point);
-            }
-            else // if (fontSize < 0)
-            {
-                float size = -1 * fontSize * font.SizeInPoints;
-                return new Font(font.FontFamily, size, font.Style, GraphicsUnit.Point);
             }
         }
     }

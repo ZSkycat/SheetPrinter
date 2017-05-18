@@ -24,9 +24,9 @@ namespace SheetPrinter.Core.Model
         public float PrinterOffsetY { get; set; } = 0;
 
         /// <summary>
-        /// 插件列表
+        /// 插件文件列表
         /// </summary>
-        public List<string> PluginList = new List<string>();
+        public List<string> PluginFileList = new List<string>();
 
         /// <summary>
         /// 模板填充列表

@@ -12,6 +12,8 @@
         Month,
         Day,
         Hour,
+        Minute,
+        Second,
         // 常用字段
         寄件人姓名 = 200,
         寄件人单位,

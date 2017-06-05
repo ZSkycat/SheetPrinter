@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace SheetPrinter.Core
 {
+    /// <summary>
+    /// 任务控制器
+    /// </summary>
     public static class TaskController
     {
         /// <summary>
@@ -12,7 +15,7 @@ namespace SheetPrinter.Core
         public static List<TaskInfoModel> TaskList { get; } = new List<TaskInfoModel>();
 
         /// <summary>
-        /// 添加到任务队列
+        /// 添加新任务到队列
         /// </summary>
         /// <param name="data">模板数据</param>
         /// <param name="pluginData">插件自定义数据</param>

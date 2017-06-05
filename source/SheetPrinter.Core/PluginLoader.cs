@@ -5,7 +5,10 @@ using System.Reflection;
 
 namespace SheetPrinter.Core
 {
-    public static class PluginController
+    /// <summary>
+    /// 插件加载器
+    /// </summary>
+    public static class PluginLoader
     {
         /// <summary>
         /// 插件信息字典
@@ -24,7 +27,7 @@ namespace SheetPrinter.Core
         /// <returns>成功=true，失败=false</returns>
         public static bool LoadPlugin(string pluginFile)
         {
-            var assembly = Assembly.LoadFrom($@"{ProgramData.PluginPath}\{pluginFile}");
+            var assembly = Assembly.LoadFrom($@"{Program.PluginPath}\{pluginFile}");
             foreach (var t in assembly.GetTypes())
             {
                 if (t.GetInterface(nameof(IPlugin)) != null)

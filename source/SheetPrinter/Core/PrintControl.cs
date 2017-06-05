@@ -87,6 +87,7 @@ namespace SheetPrinter.Core
         /// <param name="g">要绘制的 Graphics 对象</param>
         private void DrawPreview(Graphics g)
         {
+            System.Console.WriteLine("DrawPreview");
             var data = dataList[previewIndex];
             try
             {

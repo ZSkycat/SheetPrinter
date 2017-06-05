@@ -2,6 +2,9 @@
 
 namespace SheetPrinter.Core
 {
+    /// <summary>
+    /// 定义插件模式的入口
+    /// </summary>
     public interface IMode
     {
         /// <summary>

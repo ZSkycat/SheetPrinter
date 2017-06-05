@@ -73,8 +73,8 @@ namespace SheetPrinter.Core
             e.Graphics.PageUnit = GraphicsUnit.Display;
             foreach (var i in data.ElementList)
             {
-                var font = CalcFont(ProgramData.Config.Font, i.FontSize);
-                e.Graphics.DrawString(i.Value, font, Brushes.Black, new RectangleF(CmToPrint(i.X + ProgramData.Config.PrinterOffsetX), CmToPrint(i.Y + ProgramData.Config.PrinterOffsetY), CmToPrint(i.Width), CmToPrint(i.Height)));
+                var font = CalcFont(Program.Config.Font, i.FontSize);
+                e.Graphics.DrawString(i.Value, font, Brushes.Black, new RectangleF(CmToPrint(i.X + Program.Config.PrinterOffsetX), CmToPrint(i.Y + Program.Config.PrinterOffsetY), CmToPrint(i.Width), CmToPrint(i.Height)));
             }
         }
 

@@ -7,11 +7,11 @@ using System.Text;
 namespace SheetPrinter.Core
 {
     /// <summary>
-    /// 程序数据
+    /// 程序基础和初始化
     /// </summary>
-    public static class ProgramData
+    public static class Program
     {
-        public const string Field_Time = "寄件时间";
+        public const string Text_Time = "寄件时间";
 
         /// <summary>
         /// 配置文件路径

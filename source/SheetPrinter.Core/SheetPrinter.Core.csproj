@@ -35,11 +35,25 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElementType.cs" />
+    <Compile Include="Form\DateTimeCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\DateTimeCheck.Designer.cs">
+      <DependentUpon>DateTimeCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FillSelect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form\FillSelect.Designer.cs">
+      <DependentUpon>FillSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\SheetPreview.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -54,9 +68,9 @@
     <Compile Include="Model\TaskInfoModel.cs" />
     <Compile Include="Model\TemplateFillModel.cs" />
     <Compile Include="Model\TemplateModel.cs" />
-    <Compile Include="PluginController.cs" />
+    <Compile Include="PluginLoader.cs" />
     <Compile Include="PrintController.cs" />
-    <Compile Include="ProgramData.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskController.cs" />
     <Compile Include="UnitConvert.cs" />

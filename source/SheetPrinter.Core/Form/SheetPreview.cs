@@ -7,7 +7,7 @@ using static SheetPrinter.Core.UnitConvert;
 namespace SheetPrinter.Core.Form
 {
     /// <summary>
-    /// 货单预览控件
+    /// 具备延迟功能的预览控件
     /// </summary>
     public partial class SheetPreview : UserControl
     {
@@ -17,6 +17,10 @@ namespace SheetPrinter.Core.Form
         private TemplateModel data;
         private Image background = null;
         private Panel content;
+
+        // 延迟功能
+        private DateTime drawTime = new DateTime(0);
+        private Timer timer;
 
         public SheetPreview()
         {
@@ -40,7 +44,7 @@ namespace SheetPrinter.Core.Form
             {
                 try
                 {
-                    background = Image.FromFile($@"{ProgramData.TemplatePath}\{data.BackgroundFileName}");
+                    background = Image.FromFile($@"{Program.TemplatePath}\{data.BackgroundFileName}");
                 }
                 catch (Exception ex)
                 {
@@ -53,8 +57,37 @@ namespace SheetPrinter.Core.Form
                 Width = CmToPx_int(data.Width, dpiX),
                 Height = CmToPx_int(data.Height, dpiY),
             };
-            content.Paint += (sender, e) => { DrawPreview(e.Graphics); };
+            content.Paint += (sender, e) => { RefreshPreview(e.Graphics); };
             Controls.Add(content);
+
+            timer = new Timer();
+            timer.Interval = 1500;
+            timer.Tick += (sender, e) => { RefreshPreview(); };
+        }
+
+        /// <summary>
+        /// 刷新预览图
+        /// </summary>
+        public void RefreshPreview()
+        {
+            DrawPreview(null);
+        }
+
+        /// <summary>
+        /// 刷新预览图
+        /// </summary>
+        private void RefreshPreview(Graphics g)
+        {
+            if ((DateTime.Now - drawTime) > new TimeSpan(15000000))
+            {
+                DrawPreview(g ?? content.CreateGraphics());
+                drawTime = DateTime.Now;
+                timer.Stop();
+            }
+            else
+            {
+                timer.Start();
+            }
         }
 
         /// <summary>
@@ -68,7 +101,7 @@ namespace SheetPrinter.Core.Form
             }
             foreach (var i in data.ElementList)
             {
-                var font = PrintController.CalcFont(ProgramData.Config.Font, i.FontSize);
+                var font = PrintController.CalcFont(Program.Config.Font, i.FontSize);
                 g.DrawString(i.Value, font, Brushes.Black, new RectangleF(CmToPx(i.X, dpiX), CmToPx(i.Y, dpiY), CmToPx(i.Width, dpiX), CmToPx(i.Height, dpiY)));
             }
         }

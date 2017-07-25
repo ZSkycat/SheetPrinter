@@ -32,7 +32,7 @@ namespace SheetPrinter.Core.Form
         }
 
         /// <summary>
-        /// 初始化预览数据
+        /// 初始化
         /// </summary>
         /// <param name="data">模板数据</param>
         /// <param name="font">使用字体</param>

@@ -28,10 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.cbSelect = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
+            // 
+            // cbSelect
+            // 
+            this.cbSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbSelect.FormattingEnabled = true;
+            this.cbSelect.Location = new System.Drawing.Point(0, 0);
+            this.cbSelect.Name = "cbSelect";
+            this.cbSelect.Size = new System.Drawing.Size(150, 20);
+            this.cbSelect.TabIndex = 0;
+            this.cbSelect.SelectedIndexChanged += new System.EventHandler(this.cbSelect_SelectedIndexChanged);
+            // 
+            // FillSelect
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbSelect);
+            this.Name = "FillSelect";
+            this.Size = new System.Drawing.Size(150, 20);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox cbSelect;
     }
 }

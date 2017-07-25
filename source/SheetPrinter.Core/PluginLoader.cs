@@ -43,6 +43,7 @@ namespace SheetPrinter.Core
                             ModeType = plugin.ModeTypeList[i],
                         });
                     }
+                    return true;
                 }
             }
             return false;
@@ -57,10 +58,12 @@ namespace SheetPrinter.Core
         {
             try
             {
-                IMode mode = (IMode)Activator.CreateInstance(model.ModeType);
+                return (IMode)Activator.CreateInstance(model.ModeType);
             }
-            catch { }
-            return null;
+            catch
+            {
+                return null;
+            }
         }
     }
 }

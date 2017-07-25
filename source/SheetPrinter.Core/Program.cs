@@ -2,6 +2,7 @@
 using SheetPrinter.Core.Model;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace SheetPrinter.Core
@@ -39,6 +40,7 @@ namespace SheetPrinter.Core
             TemplatePath = $@"{Environment.CurrentDirectory}\template";
             PluginPath = $@"{Environment.CurrentDirectory}\plugin";
             LoadConfig();
+            LoadPluginFromPath();
         }
 
         /// <summary>
@@ -64,6 +66,19 @@ namespace SheetPrinter.Core
         {
             var json = JsonConvert.SerializeObject(Config);
             File.WriteAllText(ConfigPath, json, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// 加载插件目录的插件
+        /// </summary>
+        public static void LoadPluginFromPath()
+        {
+            DirectoryInfo dire = Directory.CreateDirectory(PluginPath);
+            string[] files = dire.GetFiles("*.dll").Select(i => i.Name).ToArray();
+            foreach(var i in files)
+            {
+                PluginLoader.LoadPlugin(i);
+            }
         }
     }
 }

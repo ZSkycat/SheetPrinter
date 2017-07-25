@@ -79,6 +79,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\FillSelect.resx">
+      <DependentUpon>FillSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\SheetPreview.resx">
       <DependentUpon>SheetPreview.cs</DependentUpon>
     </EmbeddedResource>

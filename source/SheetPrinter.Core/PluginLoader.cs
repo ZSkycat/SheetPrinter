@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 
 namespace SheetPrinter.Core
 {
@@ -11,31 +12,31 @@ namespace SheetPrinter.Core
     public static class PluginLoader
     {
         /// <summary>
-        /// 插件信息字典
+        /// 插件列表
         /// </summary>
-        public static Dictionary<string, string> PluginInfoList { get; } = new Dictionary<string, string>();
+        public static List<IPlugin> PluginList { get; } = new List<IPlugin>();
 
         /// <summary>
-        /// 插件模式信息列表
+        /// 模式列表
         /// </summary>
         public static List<ModeInfoModel> ModeList { get; } = new List<ModeInfoModel>();
 
         /// <summary>
         /// 加载插件
         /// </summary>
-        /// <param name="pluginFile">插件文件</param>
+        /// <param name="pluginFile">插件文件名</param>
         /// <returns>成功=true，失败=false</returns>
         public static bool LoadPlugin(string pluginFile)
         {
             var assembly = Assembly.LoadFrom($@"{Program.PluginPath}\{pluginFile}");
-            foreach (var t in assembly.GetTypes())
+
+            foreach (var type in assembly.GetExportedTypes())
             {
-                if (t.GetInterface(nameof(IPlugin)) != null)
+                if (type.GetInterfaces().Contains(typeof(IPlugin)))
                 {
-                    IPlugin plugin = (IPlugin)Activator.CreateInstance(t);
-                    plugin.Main();
-                    PluginInfoList.Add(pluginFile, plugin.PluginInfo);
-                    for (var i = 0; i < plugin.ModeNameList.Length; i++)
+                    IPlugin plugin = (IPlugin)Activator.CreateInstance(type);
+                    PluginList.Add(plugin);
+                    for (var i = 0; i < plugin.ModeTypeList.Length; i++)
                     {
                         ModeList.Add(new ModeInfoModel()
                         {

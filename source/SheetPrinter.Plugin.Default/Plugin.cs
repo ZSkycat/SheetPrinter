@@ -10,9 +10,5 @@ namespace SheetPrinter.Plugin.Default
         public string[] ModeNameList { get; } = { "通用编辑", "淘宝物流格式" };
 
         public Type[] ModeTypeList { get; } = { typeof(ModeCommon) };
-
-        public void Main()
-        {
-        }
     }
 }

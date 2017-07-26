@@ -21,10 +21,5 @@ namespace SheetPrinter.Core
         /// 类型列表，与模式名称列表按顺序对应
         /// </summary>
         Type[] ModeTypeList { get; }
-
-        /// <summary>
-        /// 插件的主入口
-        /// </summary>
-        void Main();
     }
 }

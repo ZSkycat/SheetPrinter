@@ -17,28 +17,32 @@ namespace SheetPrinter.Core
         /// <summary>
         /// 配置文件路径
         /// </summary>
-        public static string ConfigPath { get; set; }
+        public static string ConfigPath { get => _configPath; }
+        private static string _configPath;
         /// <summary>
         /// 模板目录路径
         /// </summary>
-        public static string TemplatePath { get; set; }
+        public static string TemplatePath { get => _templatePath; }
+        private static string _templatePath;
         /// <summary>
         /// 插件目录路径
         /// </summary>
-        public static string PluginPath { get; set; }
+        public static string PluginPath { get => _pluginPath; }
+        private static string _pluginPath;
         /// <summary>
         /// 配置数据
         /// </summary>
-        public static ConfigModel Config { get; set; }
+        public static ConfigModel Config { get => _config; }
+        private static ConfigModel _config;
 
         /// <summary>
         /// 初始化
         /// </summary>
         public static void Initialize()
         {
-            ConfigPath = $@"{Environment.CurrentDirectory}\core.config";
-            TemplatePath = $@"{Environment.CurrentDirectory}\template";
-            PluginPath = $@"{Environment.CurrentDirectory}\plugin";
+            _configPath = $@"{Environment.CurrentDirectory}\core.config";
+            _templatePath = $@"{Environment.CurrentDirectory}\template";
+            _pluginPath = $@"{Environment.CurrentDirectory}\plugin";
             LoadConfig();
             LoadPluginFromPath();
         }
@@ -51,11 +55,11 @@ namespace SheetPrinter.Core
             try
             {
                 var json = File.ReadAllText(ConfigPath, Encoding.UTF8);
-                Config = JsonConvert.DeserializeObject<ConfigModel>(json);
+                _config = JsonConvert.DeserializeObject<ConfigModel>(json);
             }
             catch
             {
-                Config = new ConfigModel();
+                _config = new ConfigModel();
             }
         }
 
@@ -75,7 +79,7 @@ namespace SheetPrinter.Core
         {
             DirectoryInfo dire = Directory.CreateDirectory(PluginPath);
             string[] files = dire.GetFiles("*.dll").Select(i => i.Name).ToArray();
-            foreach(var i in files)
+            foreach (var i in files)
             {
                 PluginLoader.LoadPlugin(i);
             }

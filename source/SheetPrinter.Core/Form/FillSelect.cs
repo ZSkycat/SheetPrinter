@@ -10,6 +10,12 @@ namespace SheetPrinter.Core.Form
     public partial class FillSelect : UserControl
     {
         private TemplateModel data;
+        private bool flagOne;
+
+        /// <summary>
+        /// 数据填充进模型后发生
+        /// </summary>
+        public event EventHandler DataModelChanged;
 
         public FillSelect()
         {
@@ -20,28 +26,42 @@ namespace SheetPrinter.Core.Form
         /// 初始化
         /// </summary>
         /// <param name="data">模板数据</param>
-        public void Initialize(TemplateModel data)
+        /// <param name="flagOne">是否启用一次性填充, 即选择后触发取消选择</param>
+        public void Initialize(TemplateModel data, bool flagOne = true)
         {
             this.data = data;
+            this.flagOne = flagOne;
             cbSelect.DataSource = Program.Config.TemplateFillList;
             cbSelect.DisplayMember = "Name";
             cbSelect.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// 填充已选中的数据, 一次性填充模式下不可用
+        /// </summary>
+        public void Fill()
+        {
+            if (flagOne)
+                throw new NotSupportedException("一次性填充模式下不可用.");
+            else
+                FillDataModel();
         }
 
         private void cbSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbSelect.SelectedIndex >= 0)
             {
-                Fill();
-                // 取消选择
-                cbSelect.SelectedIndex = -1;
+                FillDataModel();
+                DataModelChanged?.Invoke(this, null);
+                if (flagOne)
+                    cbSelect.SelectedIndex = -1;
             }
         }
 
         /// <summary>
-        /// 填充数据
+        /// 填充数据模型
         /// </summary>
-        public void Fill()
+        private void FillDataModel()
         {
             foreach (var i in Program.Config.TemplateFillList[cbSelect.SelectedIndex].ElementData)
             {

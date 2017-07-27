@@ -35,7 +35,6 @@ namespace SheetPrinter.Core.Form
         /// 初始化
         /// </summary>
         /// <param name="data">模板数据</param>
-        /// <param name="font">使用字体</param>
         public void Initialize(TemplateModel data)
         {
             this.data = data;

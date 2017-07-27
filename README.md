@@ -1,5 +1,5 @@
 # SheetPrintTool
-物流单据打印工具。  
+物流运单打印工具。  
 为方便家人打印快递单而开发的小工具，专注于打印，没有各种高级功能。
 
 ## 功能
@@ -14,7 +14,7 @@
 属性 Width, Height, OffsetX, OffsetY, X, Y 的单位是 mm  
 属性 Tag 由 ElementTag 规定
 
-## 依赖
+## Dependency
 - [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 
 # License

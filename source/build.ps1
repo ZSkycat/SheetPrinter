@@ -11,7 +11,7 @@ Set-Location $msBuildPath
 $sheetPrinterBuild = Join-Path $projectPath 'build/SheetPrinter'
 Set-Location $projectPath
 
-if (Resolve-Path $sheetPrinterBuild) {
+if (Test-Path $sheetPrinterBuild) {
     Remove-Item -Recurse $sheetPrinterBuild
 }
 mkdir $sheetPrinterBuild | Out-Null
@@ -21,5 +21,5 @@ Remove-Item "$sheetPrinterBuild\*.pdb"
 Remove-Item "$sheetPrinterBuild\*.xml"
 
 # End
-Write-Host 'Bulid End!'
+Write-Host 'Build End!'
 Read-Host

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 
@@ -8,8 +7,9 @@ namespace PrinterHelper
 {
     public partial class FormMain : Form
     {
-        private static Font PrintFont = new Font(new FontFamily("黑体"), 10f);
-        private static Pen PrintPen = new Pen(Color.Black) { DashStyle = DashStyle.Dot };
+        private static readonly Font PrintFont = new Font(new FontFamily("黑体"), 10f);
+        private static readonly Pen PrintPen = Pens.Black;
+        private static readonly Brush PrintBrush = Brushes.Black;
 
         public FormMain()
         {
@@ -19,7 +19,7 @@ namespace PrinterHelper
         private void PrintButton_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            if (!TryPrintConfig(btn.Name))
+            if (!CheckPrintOption(btn.Name))
             {
                 return;
             }
@@ -35,35 +35,35 @@ namespace PrinterHelper
         }
 
         /// <summary>
-        /// 检测打印参数正确性
+        /// 校验打印参数
         /// </summary>
-        /// <param name="branchName">类型名称</param>
-        private bool TryPrintConfig(string branchName)
+        /// <param name="buttonName">按钮名称</param>
+        private bool CheckPrintOption(string buttonName)
         {
-            string name = "null";
+            string tipName = "null";
             try
             {
-                name = nameof(tbWidth);
+                tipName = "宽度";
                 Convert.ToSingle(tbWidth.Text);
-                name = nameof(tbHeight);
+                tipName = "高度";
                 Convert.ToSingle(tbHeight.Text);
-                switch (branchName)
+                switch (buttonName)
                 {
                     case "bScalePrint":
-                        name = nameof(tbScaleSize);
+                        tipName = "刻度间距";
                         Convert.ToSingle(tbScaleSize.Text);
-                        name = nameof(tbScaleLength);
+                        tipName = "刻度线长度";
                         Convert.ToSingle(tbScaleLength.Text);
                         break;
                     case "bGridPrint":
-                        name = nameof(tbGridSize);
+                        tipName = "网格间距";
                         Convert.ToSingle(tbGridSize.Text);
                         break;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{name}: {ex.Message}", "配置错误");
+                MessageBox.Show($"{tipName}: {ex.Message}", "参数错误");
                 return false;
             }
             return true;
@@ -89,13 +89,13 @@ namespace PrinterHelper
             {
                 float printWidth = Convert.ToSingle(tbWidth.Text);
                 float printHeight = Convert.ToSingle(tbHeight.Text);
-                document.DefaultPageSettings.PaperSize = new PaperSize("Custom", MmToPrinterUnit(printWidth), MmToPrinterUnit(printHeight));
+                document.DefaultPageSettings.PaperSize = new PaperSize("Custom", CmToPrint_int(printWidth), CmToPrint_int(printHeight));
                 document.Print();
             }
         }
 
         /// <summary>
-        /// 打印绘制 宽高刻度尺
+        /// 打印绘制 刻度尺
         /// </summary>
         private void ScaleDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -106,8 +106,8 @@ namespace PrinterHelper
             float scaleLength = Convert.ToSingle(tbScaleLength.Text);
             float scaleSizeHalf = scaleSize / 2;
             float scaleLengthHalf = scaleLength / 2;
-            float length = MmToPrinterUnit_f(scaleLength);
-            float lengthHalf = MmToPrinterUnit_f(scaleLengthHalf);
+            float length = CmToPrint(scaleLength);
+            float lengthHalf = CmToPrint(scaleLengthHalf);
 
             // 绘制水平刻度尺
             if (cbScaleWidth.Checked)
@@ -116,21 +116,23 @@ namespace PrinterHelper
                 e.Graphics.DrawLine(Pens.Black, 0, 0, 0, length);
                 if (cbScaleNumber.Checked)
                 {
-                    e.Graphics.DrawString("0", PrintFont, Brushes.Black, new RectangleF(0, length, 0, 0));
+                    e.Graphics.DrawString("0", PrintFont, PrintBrush, new RectangleF(0, length, 0, 0));
                 }
                 // 循环绘制半刻度、刻度、数值
                 for (int i = 0; i < printWidth / scaleSize; i++)
                 {
                     if (cbScaleHalf.Checked)
                     {
-                        var xHalf = MmToPrinterUnit_f(i * scaleSize + scaleSizeHalf);
+                        var xHalf = CmToPrint(i * scaleSize + scaleSizeHalf);
                         e.Graphics.DrawLine(Pens.Black, xHalf, 0, xHalf, lengthHalf);
                     }
-                    var x = MmToPrinterUnit_f((i + 1) * scaleSize);
+
+                    var x = CmToPrint((i + 1) * scaleSize);
                     e.Graphics.DrawLine(Pens.Black, x, 0, x, length);
+
                     if (cbScaleNumber.Checked)
                     {
-                        e.Graphics.DrawString($"{i + 1}", PrintFont, Brushes.Black, new RectangleF(x, length, 0, 0));
+                        e.Graphics.DrawString($"{i + 1}", PrintFont, PrintBrush, new RectangleF(x, length, 0, 0));
                     }
                 }
             }
@@ -142,21 +144,23 @@ namespace PrinterHelper
                 e.Graphics.DrawLine(Pens.Black, 0, 0, length, 0);
                 if (cbScaleNumber.Checked)
                 {
-                    e.Graphics.DrawString("0", PrintFont, Brushes.Black, new RectangleF(length, 0, 0, 0));
+                    e.Graphics.DrawString("0", PrintFont, PrintBrush, new RectangleF(length, 0, 0, 0));
                 }
                 // 循环绘制半刻度、刻度、数值
                 for (int i = 0; i < printHeight / scaleSize; i++)
                 {
                     if (cbScaleHalf.Checked)
                     {
-                        var yHalf = MmToPrinterUnit_f(i * scaleSize + scaleSizeHalf);
+                        var yHalf = CmToPrint(i * scaleSize + scaleSizeHalf);
                         e.Graphics.DrawLine(Pens.Black, 0, yHalf, lengthHalf, yHalf);
                     }
-                    var y = MmToPrinterUnit_f((i + 1) * scaleSize);
+
+                    var y = CmToPrint((i + 1) * scaleSize);
                     e.Graphics.DrawLine(Pens.Black, 0, y, length, y);
+
                     if (cbScaleNumber.Checked)
                     {
-                        e.Graphics.DrawString($"{i + 1}", PrintFont, Brushes.Black, new RectangleF(length, y, 0, 0));
+                        e.Graphics.DrawString($"{i + 1}", PrintFont, PrintBrush, new RectangleF(length, y, 0, 0));
                     }
                 }
             }
@@ -171,9 +175,9 @@ namespace PrinterHelper
             float printWidth = Convert.ToSingle(tbWidth.Text);
             float printHeight = Convert.ToSingle(tbHeight.Text);
             float gridSize = Convert.ToSingle(tbGridSize.Text);
-            float size = MmToPrinterUnit_f(gridSize);
-            float xMax = MmToPrinterUnit_f(Width);
-            float yMax = MmToPrinterUnit_f(Height);
+            float size = CmToPrint(gridSize);
+            float xMax = CmToPrint(Width);
+            float yMax = CmToPrint(Height);
 
             for (int i = 0; i <= printHeight / gridSize; i++)
             {
@@ -185,21 +189,21 @@ namespace PrinterHelper
             }
         }
 
-        #region UnitlHelper
+        #region UnitConvert
         /// <summary>
-        /// 将毫米转为打印机单位
+        /// 将厘米转为打印机单位
         /// </summary>
-        public static int MmToPrinterUnit(float mm)
+        public static float CmToPrint(float value)
         {
-            return Convert.ToInt32(Math.Round(mm / 25.4f * 100f));
+            return value / 2.54f * 100f;
         }
 
         /// <summary>
-        /// 将毫米转为打印机单位
+        /// 将厘米转为打印机单位
         /// </summary>
-        public static float MmToPrinterUnit_f(float mm)
+        public static int CmToPrint_int(float value)
         {
-            return mm / 25.4f * 100f;
+            return Convert.ToInt32(Math.Round(CmToPrint(value)));
         }
         #endregion
     }

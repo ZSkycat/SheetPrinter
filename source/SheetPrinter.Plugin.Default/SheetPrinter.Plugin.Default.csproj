@@ -57,4 +57,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(ProjectName).dll $(SolutionDir)SheetPrinter\bin\Debug\plugin\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

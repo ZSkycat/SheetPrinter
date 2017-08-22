@@ -74,6 +74,9 @@
     <Compile Include="UnitConvert.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="core.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ $projectPath = Split-Path $MyInvocation.MyCommand.Path  # 无尾/
 Set-Location $projectPath
 & "$msBuildPath/MSBuild.exe" "SheetPrinter.sln" /t:Build /p:Configuration=Release /p:Platform="Any CPU" /v:m
 
-# Clean And Copy
+# Clear And Copy
 $buildSheetPrinter = Join-Path $projectPath "build/SheetPrinter"
 
 if (Test-Path $buildSheetPrinter) {

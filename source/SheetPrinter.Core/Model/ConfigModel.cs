@@ -9,6 +9,11 @@ namespace SheetPrinter.Core.Model
     public class ConfigModel
     {
         /// <summary>
+        /// 数据录入模式选择索引
+        /// </summary>
+        public int InputModeIndex { get; set; } = -1;
+
+        /// <summary>
         /// 字体配置
         /// </summary>
         public Font Font { get; set; } = SystemFonts.DefaultFont;

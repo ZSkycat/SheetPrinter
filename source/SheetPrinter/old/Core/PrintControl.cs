@@ -52,13 +52,13 @@ namespace SheetPrinter.Core
             var data = dataList[previewIndex];
             try
             {
-                image = Image.FromFile($@"{Global.TemplatePath}\{data.BackgroundFileName}");
+                image = Image.FromFile($@"{SheetPrinter.Global.TemplatePath}\{data.BackgroundFileName}");
             }
             catch { }
             preview = new Panel()
             {
-                Width = MmToPx(data.Width, Global.DpiX),
-                Height = MmToPx(data.Height, Global.DpiY)
+                Width = MmToPx(data.Width, SheetPrinter.Global.DpiX),
+                Height = MmToPx(data.Height, SheetPrinter.Global.DpiY)
             };
             preview.Paint += (sender, e) => { DrawPreview(e.Graphics); };
             previewContainer.AutoScroll = true;
@@ -69,8 +69,8 @@ namespace SheetPrinter.Core
         {
             previewIndex = index;
             var data = dataList[previewIndex];
-            preview.Width = MmToPx(data.Width, Global.DpiX);
-            preview.Height = MmToPx(data.Height, Global.DpiY);
+            preview.Width = MmToPx(data.Width, SheetPrinter.Global.DpiX);
+            preview.Height = MmToPx(data.Height, SheetPrinter.Global.DpiY);
         }
 
         /// <summary>
@@ -91,12 +91,12 @@ namespace SheetPrinter.Core
             var data = dataList[previewIndex];
             try
             {
-                g.DrawImage(image, new RectangleF(0f, 0f, MmToPx_f(data.Width, Global.DpiX), MmToPx_f(data.Height, Global.DpiY)), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
+                g.DrawImage(image, new RectangleF(0f, 0f, MmToPx_f(data.Width, SheetPrinter.Global.DpiX), MmToPx_f(data.Height, SheetPrinter.Global.DpiY)), new RectangleF(0, 0, image.Width, image.Height), GraphicsUnit.Pixel);
             }
             catch { }
             foreach (var i in data.ElementList)
             {
-                g.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPx_f(i.X, Global.DpiX), MmToPx_f(i.Y, Global.DpiY), MmToPx_f(i.Width, Global.DpiX), MmToPx_f(i.Height, Global.DpiY)));
+                g.DrawString(i.Value, SheetPrinter.Global.Config.Font, Brushes.Black, new RectangleF(MmToPx_f(i.X, SheetPrinter.Global.DpiX), MmToPx_f(i.Y, SheetPrinter.Global.DpiY), MmToPx_f(i.Width, SheetPrinter.Global.DpiX), MmToPx_f(i.Height, SheetPrinter.Global.DpiY)));
             }
         }
         #endregion
@@ -147,7 +147,7 @@ namespace SheetPrinter.Core
             e.Graphics.PageUnit = GraphicsUnit.Display;
             foreach (var i in data.ElementList)
             {
-                e.Graphics.DrawString(i.Value, Global.Config.Font, Brushes.Black, new RectangleF(MmToPrinterUnit_f(i.X + data.OffsetX), MmToPrinterUnit_f(i.Y + data.OffsetY), MmToPrinterUnit_f(i.Width), MmToPrinterUnit_f(i.Height)));
+                e.Graphics.DrawString(i.Value, SheetPrinter.Global.Config.Font, Brushes.Black, new RectangleF(MmToPrinterUnit_f(i.X + data.OffsetX), MmToPrinterUnit_f(i.Y + data.OffsetY), MmToPrinterUnit_f(i.Width), MmToPrinterUnit_f(i.Height)));
             }
         }
         #endregion

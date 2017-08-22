@@ -1,6 +1,6 @@
 ﻿namespace SheetPrinter
 {
-    partial class FormInfoManage
+    partial class FormFillManage
     {
         /// <summary>
         /// Required designer variable.

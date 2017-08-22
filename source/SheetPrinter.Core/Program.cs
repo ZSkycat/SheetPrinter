@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SheetPrinter.Core.Model;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,17 +35,24 @@ namespace SheetPrinter.Core
         /// </summary>
         public static ConfigModel Config { get => _config; }
         private static ConfigModel _config;
+        /// <summary>
+        /// 模板源数据
+        /// </summary>
+        public static List<TemplateModel> Template { get => _template; }
+        private static List<TemplateModel> _template;
+
 
         /// <summary>
         /// 初始化
         /// </summary>
         public static void Initialize()
         {
-            _configPath = $@"{Environment.CurrentDirectory}\core.config";
+            _configPath = $@"{Environment.CurrentDirectory}\core.config.json";
             _templatePath = $@"{Environment.CurrentDirectory}\template";
             _pluginPath = $@"{Environment.CurrentDirectory}\plugin";
             LoadConfig();
-            LoadPluginFromPath();
+            LoadTemplate();
+            LoadPlugin();
         }
 
         /// <summary>
@@ -68,14 +76,30 @@ namespace SheetPrinter.Core
         /// </summary>
         public static void SaveConfig()
         {
-            var json = JsonConvert.SerializeObject(Config);
+            var json = JsonConvert.SerializeObject(Config, Formatting.Indented);
             File.WriteAllText(ConfigPath, json, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// 加载模板
+        /// </summary>
+        public static void LoadTemplate()
+        {
+            _template = new List<TemplateModel>();
+            string[] filePaths = Directory.GetFiles(TemplatePath, "*.json");
+            foreach (var i in filePaths)
+            {
+                var json = File.ReadAllText(i, Encoding.UTF8);
+                var data = JsonConvert.DeserializeObject<TemplateModel>(json);
+                _template.Add(data);
+            }
+            _template.Sort();
         }
 
         /// <summary>
         /// 加载插件目录的插件
         /// </summary>
-        public static void LoadPluginFromPath()
+        public static void LoadPlugin()
         {
             DirectoryInfo dire = Directory.CreateDirectory(PluginPath);
             string[] files = dire.GetFiles("*.dll").Select(i => i.Name).ToArray();

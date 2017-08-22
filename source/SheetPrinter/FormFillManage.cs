@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace SheetPrinter
 {
-    public partial class FormInfoManage : Form
+    public partial class FormFillManage : Form
     {
         private const int InitY = 5;
         private const int ChangeY = 30;
@@ -24,7 +24,7 @@ namespace SheetPrinter
             set { lbInfo.SelectedIndex = value; }
         }
 
-        public FormInfoManage()
+        public FormFillManage()
         {
             InitializeComponent();
         }

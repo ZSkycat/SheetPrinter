@@ -1,17 +1,15 @@
 ﻿using SheetPrinter.Core;
-using SheetPrinter.DataModel;
+using SheetPrinter.Core.Model;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace SheetPrinter
 {
     public partial class FormMain : Form
     {
-        // 任务功能数据
-        private ElementTag[] taskColumnTag;
-        private PrintControl print;
+        // 任务列表列源
+        private ElementType[] taskColumnType;
 
         public FormMain()
         {
@@ -20,41 +18,45 @@ namespace SheetPrinter
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            // 初始化 Dpi
-            Graphics g = CreateGraphics();
-            Global.DpiX = g.DpiX;
-            Global.DpiY = g.DpiY;
-
             // 初始化数据录入模式
-            for (var i = 0; true; i++)
-            {
-                if (Enum.GetName(typeof(InputMode), i) != null)
-                    cbInputMode.Items.Add((InputMode)i);
-                else
-                    break;
-            }
-            cbInputMode.SelectedIndex = Global.Config.InputModeIndex;
+            cbInputMode.DisplayMember = "ModeName";
+            cbInputMode.DataSource = PluginLoader.ModeList;
+            cbInputMode.SelectedIndex = Core.Program.Config.InputModeIndex;
 
-            // 初始化模版列表
-            lbTemplate.DataSource = Global.TemplateList;
+            // 初始化运单模版
             lbTemplate.DisplayMember = "Name";
-            lbTemplate.SelectedIndex = -1;
+            lbTemplate.DataSource = Core.Program.Template;
 
-            // 初始化任务功能
-            taskColumnTag = new ElementTag[] { ElementTag.收件人姓名, ElementTag.收件人电话, ElementTag.收件人地址, ElementTag.寄件人姓名, ElementTag.寄件人电话, ElementTag.寄件人地址 };
+            // 初始化任务列表
+            taskColumnType = new ElementType[] { ElementType.收件人姓名, ElementType.收件人电话, ElementType.收件人地址, ElementType.寄件人姓名, ElementType.寄件人电话, ElementType.寄件人地址 };
             lvTaskList.Columns.Add("序号", 50, HorizontalAlignment.Center);
-            lvTaskList.Columns.Add("单据模版", 100, HorizontalAlignment.Center);
-            foreach (var tag in taskColumnTag)
+            lvTaskList.Columns.Add("运单模版", 100, HorizontalAlignment.Center);
+            foreach (var type in taskColumnType)
             {
-                lvTaskList.Columns.Add(tag.ToString(), 100, HorizontalAlignment.Left);
+                lvTaskList.Columns.Add(type.ToString(), 100, HorizontalAlignment.Left);
             }
-            print = new PrintControl(Global.TaskDataList);
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Global.Config.InputModeIndex = cbInputMode.SelectedIndex;
-            Global.SaveConfig();
+            Core.Program.Config.InputModeIndex = cbInputMode.SelectedIndex;
+            Core.Program.SaveConfig();
+        }
+
+        private void lbTemplate_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            var index = lbTemplate.IndexFromPoint(e.Location);
+            if (index >= 0)
+            {
+                var data = ((TemplateModel)lbTemplate.Items[index]).Clone();
+                OpenInputMode(data);
+            }
+        }
+
+        #region 菜单功能
+        private void toolStripMenuItem填充管理_Click(object sender, EventArgs e)
+        {
+            new FormFillManage().ShowDialog(this);
         }
 
         private void toolStripMenuItem字体配置_Click(object sender, EventArgs e)
@@ -63,41 +65,22 @@ namespace SheetPrinter
             {
                 AllowVerticalFonts = false,
                 ShowEffects = false,
-                Font = Global.Config.Font
+                Font = Core.Program.Config.Font,
             };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                Global.Config.Font = dialog.Font;
-                Global.SaveConfig();
-                dialog.Dispose();
+                Core.Program.Config.Font = dialog.Font;
+                Core.Program.SaveConfig();
             }
-        }
-
-        private void toolStripMenuItem信息管理_Click(object sender, EventArgs e)
-        {
-            var form = new FormInfoManage();
-            form.ShowDialog(this);
-            form.Dispose();
         }
 
         private void toolStripMenuItem关于_Click(object sender, EventArgs e)
         {
-            var form = new FormAbout();
-            form.ShowDialog(this);
-            form.Dispose();
+            new FormAbout().ShowDialog(this);
         }
+        #endregion
 
-        private void lbTemplate_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            var index = lbTemplate.IndexFromPoint(e.Location);
-            if (index >= 0)
-            {
-                var dataCopy = ((TemplateData)lbTemplate.Items[index]).Clone();
-                OpenTemplateInputForm(dataCopy);
-            }
-        }
-
-        #region 任务功能事件
+        #region 任务功能
         private void FormMain_Activated(object sender, EventArgs e)
         {
             RefreshTaskList();
@@ -105,16 +88,16 @@ namespace SheetPrinter
 
         private void toolStripMenuItem打印_Click(object sender, EventArgs e)
         {
-            if (Global.TaskDataList.Count != 0)
+            if (lvTaskList.Items.Count != 0)
             {
-                print.Print(-1);
+                new PrintController(TaskController.TaskList).Print();
                 toolStripMenuItem清空_Click(null, null);
             }
         }
 
         private void toolStripMenuItem清空_Click(object sender, EventArgs e)
         {
-            Global.TaskDataList.Clear();
+            TaskController.Clear();
             RefreshTaskList();
         }
 
@@ -127,31 +110,14 @@ namespace SheetPrinter
         private void 编辑ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var index = lvTaskList.SelectedIndices[0];
-            new FormInputCommon(Global.TaskDataList[index]).Show();
+            OpenInputMode(TaskController.TaskList[index]);
         }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var index = lvTaskList.SelectedIndices[0];
-            Global.TaskDataList.RemoveAt(index);
+            TaskController.Delete(index);
             RefreshTaskList();
-        }
-        #endregion
-
-        /// <summary>
-        /// 打开数据输入窗口
-        /// </summary>
-        private void OpenTemplateInputForm(TemplateData data)
-        {
-            switch ((InputMode)cbInputMode.SelectedItem)
-            {
-                case InputMode.通用编辑模式:
-                    new FormInputCommon(data).Show();
-                    break;
-                case InputMode.淘宝中国物流格式:
-                    new FormInputTaobao(data).Show();
-                    break;
-            }
         }
 
         /// <summary>
@@ -160,22 +126,39 @@ namespace SheetPrinter
         private void RefreshTaskList()
         {
             lvTaskList.BeginUpdate();
-            // 清空数据
             lvTaskList.Items.Clear();
-            // 加载数据源
-            var index = 0;
-            foreach (var data in Global.TaskDataList)
+            // 加载任务数据源
+            for (var i = 0; i < TaskController.TaskList.Count; i++)
             {
-                var item = new ListViewItem(index.ToString());
+                var data = TaskController.TaskList[i].Data;
+                var item = new ListViewItem(i.ToString());
                 item.SubItems.Add(data.Name);
-                foreach (var tag in taskColumnTag)
+                foreach (var type in taskColumnType)
                 {
-                    item.SubItems.Add(data.ElementList.Find(elementData => { return elementData.Tag == tag; }).Value);
+                    item.SubItems.Add(data.ElementList.Find(o => o.Type == type).Value);
                 }
                 lvTaskList.Items.Add(item);
-                index++;
             }
             lvTaskList.EndUpdate();
+        }
+        #endregion
+
+        /// <summary>
+        /// 打开数据录入模式窗口，新建
+        /// </summary>
+        private void OpenInputMode(TemplateModel data)
+        {
+            IMode mode = PluginLoader.CreateMode((ModeInfoModel)cbInputMode.SelectedItem);
+            mode.RunNew(data);
+        }
+
+        /// <summary>
+        /// 打开数据录入模式窗口，编辑
+        /// </summary>
+        private void OpenInputMode(TaskInfoModel data)
+        {
+            IMode mode = PluginLoader.CreateMode((ModeInfoModel)cbInputMode.SelectedItem);
+            mode.RunEdit(data);
         }
     }
 }

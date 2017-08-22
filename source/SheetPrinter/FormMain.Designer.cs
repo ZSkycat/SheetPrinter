@@ -40,7 +40,7 @@
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripMenuItem配置 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem信息管理 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem填充管理 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem字体配置 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem任务 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem打印 = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +87,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 19);
             this.label2.TabIndex = 2;
-            this.label2.Text = "单据模版（双击启动）";
+            this.label2.Text = "运单模版（双击启动）";
             // 
             // label1
             // 
@@ -175,23 +175,23 @@
             // toolStripMenuItem配置
             // 
             this.toolStripMenuItem配置.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem信息管理,
+            this.toolStripMenuItem填充管理,
             this.toolStripMenuItem字体配置});
             this.toolStripMenuItem配置.Name = "toolStripMenuItem配置";
             this.toolStripMenuItem配置.Size = new System.Drawing.Size(44, 21);
             this.toolStripMenuItem配置.Text = "配置";
             // 
-            // toolStripMenuItem信息管理
+            // toolStripMenuItem填充管理
             // 
-            this.toolStripMenuItem信息管理.Name = "toolStripMenuItem信息管理";
-            this.toolStripMenuItem信息管理.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem信息管理.Text = "信息管理";
-            this.toolStripMenuItem信息管理.Click += new System.EventHandler(this.toolStripMenuItem信息管理_Click);
+            this.toolStripMenuItem填充管理.Name = "toolStripMenuItem填充管理";
+            this.toolStripMenuItem填充管理.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem填充管理.Text = "填充管理";
+            this.toolStripMenuItem填充管理.Click += new System.EventHandler(this.toolStripMenuItem填充管理_Click);
             // 
             // toolStripMenuItem字体配置
             // 
             this.toolStripMenuItem字体配置.Name = "toolStripMenuItem字体配置";
-            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem字体配置.Text = "字体配置";
             this.toolStripMenuItem字体配置.Click += new System.EventHandler(this.toolStripMenuItem字体配置_Click);
             // 
@@ -276,7 +276,7 @@
         private System.Windows.Forms.ListView lvTaskList;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem配置;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem信息管理;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem填充管理;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem字体配置;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem任务;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem打印;

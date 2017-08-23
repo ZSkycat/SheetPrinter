@@ -40,8 +40,9 @@
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripMenuItem配置 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem填充管理 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem打印配置 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem字体配置 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem填充管理 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem任务 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem打印 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem清空 = new System.Windows.Forms.ToolStripMenuItem();
@@ -175,18 +176,19 @@
             // toolStripMenuItem配置
             // 
             this.toolStripMenuItem配置.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem填充管理,
-            this.toolStripMenuItem字体配置});
+            this.toolStripMenuItem打印配置,
+            this.toolStripMenuItem字体配置,
+            this.toolStripMenuItem填充管理});
             this.toolStripMenuItem配置.Name = "toolStripMenuItem配置";
             this.toolStripMenuItem配置.Size = new System.Drawing.Size(44, 21);
             this.toolStripMenuItem配置.Text = "配置";
             // 
-            // toolStripMenuItem填充管理
+            // toolStripMenuItem打印配置
             // 
-            this.toolStripMenuItem填充管理.Name = "toolStripMenuItem填充管理";
-            this.toolStripMenuItem填充管理.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem填充管理.Text = "填充管理";
-            this.toolStripMenuItem填充管理.Click += new System.EventHandler(this.toolStripMenuItem填充管理_Click);
+            this.toolStripMenuItem打印配置.Name = "toolStripMenuItem打印配置";
+            this.toolStripMenuItem打印配置.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem打印配置.Text = "打印配置";
+            this.toolStripMenuItem打印配置.Click += new System.EventHandler(this.toolStripMenuItem打印配置_Click);
             // 
             // toolStripMenuItem字体配置
             // 
@@ -194,6 +196,13 @@
             this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem字体配置.Text = "字体配置";
             this.toolStripMenuItem字体配置.Click += new System.EventHandler(this.toolStripMenuItem字体配置_Click);
+            // 
+            // toolStripMenuItem填充管理
+            // 
+            this.toolStripMenuItem填充管理.Name = "toolStripMenuItem填充管理";
+            this.toolStripMenuItem填充管理.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem填充管理.Text = "填充管理";
+            this.toolStripMenuItem填充管理.Click += new System.EventHandler(this.toolStripMenuItem填充管理_Click);
             // 
             // toolStripMenuItem任务
             // 
@@ -286,6 +295,7 @@
         private System.Windows.Forms.ContextMenuStrip menuTaskItem;
         private System.Windows.Forms.ToolStripMenuItem 编辑ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem打印配置;
     }
 }
 

@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbInfo = new System.Windows.Forms.ListBox();
+            this.lbList = new System.Windows.Forms.ListBox();
             this.bSave = new System.Windows.Forms.Button();
             this.bNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pInput = new System.Windows.Forms.Panel();
             this.bDelete = new System.Windows.Forms.Button();
             this.lState = new System.Windows.Forms.Label();
-            this.bNewCopy = new System.Windows.Forms.Button();
+            this.bClone = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lbInfo
+            // lbList
             // 
-            this.lbInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lbList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbInfo.FormattingEnabled = true;
-            this.lbInfo.ItemHeight = 19;
-            this.lbInfo.Location = new System.Drawing.Point(10, 70);
-            this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Size = new System.Drawing.Size(200, 384);
-            this.lbInfo.TabIndex = 0;
-            this.lbInfo.SelectedIndexChanged += new System.EventHandler(this.lbInfo_SelectedIndexChanged);
+            this.lbList.FormattingEnabled = true;
+            this.lbList.ItemHeight = 19;
+            this.lbList.Location = new System.Drawing.Point(10, 70);
+            this.lbList.Name = "lbList";
+            this.lbList.Size = new System.Drawing.Size(200, 422);
+            this.lbList.TabIndex = 0;
+            this.lbList.SelectedIndexChanged += new System.EventHandler(this.lbList_SelectedIndexChanged);
             // 
             // bSave
             // 
@@ -75,9 +75,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 19);
+            this.label1.Size = new System.Drawing.Size(139, 19);
             this.label1.TabIndex = 2;
-            this.label1.Text = "填充信息列表（选中修改）";
+            this.label1.Text = "填充列表（选中编辑）";
             // 
             // pInput
             // 
@@ -87,7 +87,7 @@
             this.pInput.AutoScroll = true;
             this.pInput.Location = new System.Drawing.Point(215, 70);
             this.pInput.Name = "pInput";
-            this.pInput.Size = new System.Drawing.Size(420, 394);
+            this.pInput.Size = new System.Drawing.Size(420, 444);
             this.pInput.TabIndex = 3;
             // 
             // bDelete
@@ -110,35 +110,35 @@
             this.lState.TabIndex = 2;
             this.lState.Text = "新建:";
             // 
-            // bNewCopy
+            // bClone
             // 
-            this.bNewCopy.Location = new System.Drawing.Point(180, 10);
-            this.bNewCopy.Name = "bNewCopy";
-            this.bNewCopy.Size = new System.Drawing.Size(75, 30);
-            this.bNewCopy.TabIndex = 1;
-            this.bNewCopy.Text = "新建副本";
-            this.bNewCopy.UseVisualStyleBackColor = true;
-            this.bNewCopy.Click += new System.EventHandler(this.bNewCopy_Click);
+            this.bClone.Location = new System.Drawing.Point(180, 10);
+            this.bClone.Name = "bClone";
+            this.bClone.Size = new System.Drawing.Size(75, 30);
+            this.bClone.TabIndex = 1;
+            this.bClone.Text = "克隆";
+            this.bClone.UseVisualStyleBackColor = true;
+            this.bClone.Click += new System.EventHandler(this.bClone_Click);
             // 
-            // FormInfoManage
+            // FormFillManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 461);
+            this.ClientSize = new System.Drawing.Size(634, 511);
             this.Controls.Add(this.pInput);
             this.Controls.Add(this.lState);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bNew);
             this.Controls.Add(this.bDelete);
-            this.Controls.Add(this.bNewCopy);
+            this.Controls.Add(this.bClone);
             this.Controls.Add(this.bSave);
-            this.Controls.Add(this.lbInfo);
+            this.Controls.Add(this.lbList);
             this.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MinimumSize = new System.Drawing.Size(650, 500);
-            this.Name = "FormInfoManage";
+            this.Name = "FormFillManage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "信息管理";
+            this.Text = "填充管理";
             this.Load += new System.EventHandler(this.FormInfoManage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -147,13 +147,13 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbInfo;
+        private System.Windows.Forms.ListBox lbList;
         private System.Windows.Forms.Button bSave;
         private System.Windows.Forms.Button bNew;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pInput;
         private System.Windows.Forms.Button bDelete;
         private System.Windows.Forms.Label lState;
-        private System.Windows.Forms.Button bNewCopy;
+        private System.Windows.Forms.Button bClone;
     }
 }

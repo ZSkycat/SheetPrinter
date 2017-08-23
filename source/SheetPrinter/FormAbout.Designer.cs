@@ -40,18 +40,18 @@
             this.bOk.Name = "bOk";
             this.bOk.Size = new System.Drawing.Size(60, 30);
             this.bOk.TabIndex = 0;
-            this.bOk.Text = "确定";
+            this.bOk.Text = "关闭";
             this.bOk.UseVisualStyleBackColor = true;
             this.bOk.Click += new System.EventHandler(this.bOk_Click);
             // 
             // tbInfo
             // 
+            this.tbInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbInfo.Location = new System.Drawing.Point(10, 10);
             this.tbInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbInfo.Multiline = true;
             this.tbInfo.Name = "tbInfo";
             this.tbInfo.ReadOnly = true;
-            this.tbInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbInfo.Size = new System.Drawing.Size(400, 200);
             this.tbInfo.TabIndex = 1;
             // 
@@ -63,10 +63,11 @@
             this.Controls.Add(this.bOk);
             this.Controls.Add(this.tbInfo);
             this.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormAbout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "关于 - 物流单据打印工具";
+            this.Text = "关于";
             this.Load += new System.EventHandler(this.FormAbout_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -54,9 +54,9 @@ namespace SheetPrinter
         }
 
         #region 菜单功能
-        private void toolStripMenuItem填充管理_Click(object sender, EventArgs e)
+        private void toolStripMenuItem打印配置_Click(object sender, EventArgs e)
         {
-            new FormFillManage().ShowDialog(this);
+            new FormConfig().ShowDialog(this);
         }
 
         private void toolStripMenuItem字体配置_Click(object sender, EventArgs e)
@@ -72,6 +72,11 @@ namespace SheetPrinter
                 Core.Program.Config.Font = dialog.Font;
                 Core.Program.SaveConfig();
             }
+        }
+
+        private void toolStripMenuItem填充管理_Click(object sender, EventArgs e)
+        {
+            new FormFillManage().ShowDialog(this);
         }
 
         private void toolStripMenuItem关于_Click(object sender, EventArgs e)

@@ -6,8 +6,8 @@
     <ProjectGuid>{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SheetPrinterTests</RootNamespace>
-    <AssemblyName>SheetPrinterTests</AssemblyName>
+    <RootNamespace>SheetPrinter.Test</RootNamespace>
+    <AssemblyName>SheetPrinter.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SheetPrinter.Core.Tests
+namespace SheetPrinter.Core.Test
 {
     [TestClass()]
     public class UnitConvertTests

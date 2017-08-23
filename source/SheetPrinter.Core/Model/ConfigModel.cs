@@ -31,6 +31,6 @@ namespace SheetPrinter.Core.Model
         /// <summary>
         /// 模板填充列表
         /// </summary>
-        public List<TemplateFillModel> TemplateFillList = new List<TemplateFillModel>();
+        public List<TemplateFillModel> TemplateFillList { get; set; } = new List<TemplateFillModel>();
     }
 }

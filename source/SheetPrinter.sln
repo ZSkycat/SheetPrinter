@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetPrinter.Core", "SheetP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetPrinter.Plugin.Default", "SheetPrinter.Plugin.Default\SheetPrinter.Plugin.Default.csproj", "{68B54B26-E9EF-431E-B356-A397A11755E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetPrinterTests", "SheetPrinterTests\SheetPrinterTests.csproj", "{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrinterTool", "PrinterTool\PrinterTool.csproj", "{E552528D-5669-4838-8B45-EAB9B29B8939}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetPrinter.Test", "SheetPrinter.Test\SheetPrinter.Test.csproj", "{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{68B54B26-E9EF-431E-B356-A397A11755E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68B54B26-E9EF-431E-B356-A397A11755E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68B54B26-E9EF-431E-B356-A397A11755E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E552528D-5669-4838-8B45-EAB9B29B8939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E552528D-5669-4838-8B45-EAB9B29B8939}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E552528D-5669-4838-8B45-EAB9B29B8939}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E552528D-5669-4838-8B45-EAB9B29B8939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E56035-87BE-4D15-9C49-DCD79EEEAE0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

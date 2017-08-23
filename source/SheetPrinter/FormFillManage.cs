@@ -1,4 +1,5 @@
-﻿using SheetPrinter.DataModel;
+﻿using SheetPrinter.Core;
+using SheetPrinter.Core.Model;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,23 +8,6 @@ namespace SheetPrinter
 {
     public partial class FormFillManage : Form
     {
-        private const int InitY = 5;
-        private const int ChangeY = 30;
-        private const int LabelX = 5;
-        private const int ControlX = 150;
-        private const int ControlWidth = 240;
-        private const AnchorStyles TextBoxAnchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-        private const string InfoNameString = "信息名称";
-
-        /// <summary>
-        /// 获取或设置当前选中的索引，-1 为新建
-        /// </summary>
-        private int CurrentInfoIndex
-        {
-            get { return lbInfo.SelectedIndex; }
-            set { lbInfo.SelectedIndex = value; }
-        }
-
         public FormFillManage()
         {
             InitializeComponent();
@@ -32,189 +16,221 @@ namespace SheetPrinter
         private void FormInfoManage_Load(object sender, EventArgs e)
         {
             InitInput();
-            LoadInfoList();
+            RefreshList();
         }
 
+        #region 操作
         private void bDelete_Click(object sender, EventArgs e)
         {
-            Global.Config.InfoList.RemoveAt(CurrentInfoIndex);
-            Global.Config.InfoList.Sort();
-            Global.SaveConfig();
-            LoadInfoList();
+            Core.Program.Config.TemplateFillList.RemoveAt(lbList.SelectedIndex);
+            Core.Program.Config.TemplateFillList.Sort();
+            Core.Program.SaveConfig();
+            RefreshList();
+            SetState(StateText.新建);
         }
 
         private void bNew_Click(object sender, EventArgs e)
         {
-            CurrentInfoIndex = -1;
-            ClearInput();
+            SetState(StateText.新建);
         }
 
-        private void bNewCopy_Click(object sender, EventArgs e)
+        private void bClone_Click(object sender, EventArgs e)
         {
-            CurrentInfoIndex = -1;
+            SetState(StateText.克隆);
         }
 
         private void bSave_Click(object sender, EventArgs e)
         {
-            if (CurrentInfoIndex < 0)
-            {
-                var data = new InfoData();
-                SetInfoData(data);
-                Global.Config.InfoList.Add(data);
-            }
-            else
-                SetInfoData(Global.Config.InfoList[CurrentInfoIndex]);
-            Global.Config.InfoList.Sort();
-            Global.SaveConfig();
-            LoadInfoList();
+            SetState(StateText.编辑_已保存);
         }
 
-        private void lbInfo_SelectedIndexChanged(object sender, EventArgs e)
+        private void lbList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 改变状态文本
-            if (CurrentInfoIndex < 0)
-                lState.Text = "新建:";
-            else
-                lState.Text = $"修改: [{CurrentInfoIndex}] {Global.Config.InfoList[CurrentInfoIndex].Name}";
-            // 处理信息数据
-            if (CurrentInfoIndex >= 0)
+            if (lbList.SelectedIndex >= 0)
             {
-                ClearInput();
-                pInput.Controls.Find(InfoNameString, false)[0].Text = Global.Config.InfoList[CurrentInfoIndex].Name;
-                foreach (var i in Global.Config.InfoList[CurrentInfoIndex].ElementData)
-                {
-                    Control[] controls = pInput.Controls.Find(i.Key.ToString(), false);
-                    if (controls.Length >= 1)
-                        controls[0].Text = i.Value;
-                }
+                SetState(StateText.编辑);
             }
         }
+        #endregion
+
+        #region 输入面板
+        private const string FillNameString = "填充名称";
 
         /// <summary>
         /// 初始化输入面板
         /// </summary>
         private void InitInput()
         {
-            int currentY = InitY;
-            // 创建信息名称
-            CreateTextInput(currentY, InfoNameString);
-            currentY += ChangeY;
-            // 创建字段
-            int tagIndex = 200;
-            while (true)
+            const int initY = 5;
+            const int nextY = 30;
+
+            // 创建输入项
+            var currentY = initY;
+            CreateItemInInput(currentY, FillNameString);
+            currentY += nextY;
+            for (var i = 200; true; i++)
             {
-                if (Enum.GetName(typeof(ElementTag), tagIndex) != null)
-                {
-                    CreateTextInput(currentY, (ElementTag)tagIndex);
-                    currentY += ChangeY;
-                    tagIndex++;
-                }
-                else if (tagIndex < 300)
-                    tagIndex = 300;
-                else
+                if (Enum.GetName(typeof(ElementType), i) == null)
                     break;
+                CreateItemInInput(currentY, (ElementType)i);
+                currentY += nextY;
             }
-            /*// 创建字段 - 可配置显示的字段
-            ElementTag[] elementList = { ElementTag.寄件人姓名, ElementTag.寄件人单位, ElementTag.寄件人地址, ElementTag.寄件人邮编, ElementTag.寄件人电话, ElementTag.寄件人签名, ElementTag.收件人姓名, ElementTag.收件人单位, ElementTag.收件人地址, ElementTag.收件人邮编, ElementTag.收件人电话, ElementTag.收件人目的地 };
-            foreach (var i in elementList)
-            {
-                CreateTextInput(currentY, i);
-                currentY += ChangeY;
-            }*/
-            // 防止因为滚动出现，导致宽度减小，同时在Anchor作用下导致TextBox宽度减小
-            foreach (Control i in pInput.Controls)
-            {
-                if (i is TextBox)
-                    i.Anchor = TextBoxAnchor;
-            }
-        }
 
-        /// <summary>
-        /// 加载信息列表
-        /// </summary>
-        private void LoadInfoList()
-        {
-            lbInfo.DataSource = null;
-            lbInfo.DataSource = Global.Config.InfoList;
-            lbInfo.DisplayMember = "Name";
-            lbInfo.SelectedIndex = -1;
-            ClearInput();
-        }
-
-        /// <summary>
-        /// 提取信息数据
-        /// </summary>
-        /// <param name="data">信息数据模型</param>
-        private void SetInfoData(InfoData data)
-        {
-            foreach (Control i in pInput.Controls)
+            // 滚动条出现导致面板宽度减小，在 Anchor 作用下导致TextBox宽度减小，所以延迟修改 Anchor
+            foreach (Control control in pInput.Controls)
             {
-                if (i is TextBox)
+                if (control is TextBox)
                 {
-                    if (i.Tag is ElementTag)
-                    {
-                        // 处理数据
-                        var tag = (ElementTag)i.Tag;
-                        if (i.Text == "")
-                        {
-                            // 处理数据空值删除
-                            if (data.ElementData.ContainsKey(tag))
-                                data.ElementData.Remove(tag);
-                        }
-                        else
-                        {
-                            // 处理数据修改或添加
-                            if (data.ElementData.ContainsKey(tag))
-                                data.ElementData[tag] = i.Text;
-                            else
-                                data.ElementData.Add(tag, i.Text);
-                        }
-                    }
-                    else
-                    {
-                        // 处理名称
-                        data.Name = i.Text;
-                    }
+                    control.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                 }
             }
         }
 
         /// <summary>
-        /// 清空输入
-        /// </summary>
-        private void ClearInput()
-        {
-            foreach (var i in pInput.Controls)
-            {
-                if (i is TextBox)
-                {
-                    var control = (TextBox)i;
-                    control.Clear();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 创建文本输入控件
+        /// 在输入面板创建 Label + TextBox
         /// </summary>
         /// <param name="y">y 坐标</param>
-        /// <param name="tag">标签</param>
-        private void CreateTextInput(int y, object tag)
+        /// <param name="tag">标识对象</param>
+        private void CreateItemInInput(int y, object tag)
         {
             var label = new Label()
             {
-                Location = new Point(LabelX, y),
-                Text = tag.ToString()
+                Location = new Point(5, y),
+                Text = tag.ToString(),
             };
             var textBox = new TextBox()
             {
-                Location = new Point(ControlX, y),
-                Width = ControlWidth,
+                Location = new Point(150, y),
+                Width = 240,
                 Name = tag.ToString(),
-                Tag = tag
+                Tag = tag,
             };
             pInput.Controls.Add(label);
             pInput.Controls.Add(textBox);
+        }
+
+        /// <summary>
+        /// 清空输入面板
+        /// </summary>
+        private void ClearInput()
+        {
+            foreach (Control control in pInput.Controls)
+            {
+                if (control is TextBox)
+                {
+                    ((TextBox)control).Clear();
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 刷新填充列表
+        /// </summary>
+        private void RefreshList()
+        {
+            lbList.DataSource = null;
+            lbList.DataSource = Core.Program.Config.TemplateFillList;
+            lbList.DisplayMember = "Name";
+        }
+
+        /// <summary>
+        /// 获取输入面板数据至模型
+        /// </summary>
+        private void InputToModel(TemplateFillModel model)
+        {
+            foreach (Control control in pInput.Controls)
+            {
+                if (control is TextBox)
+                {
+                    if (control.Tag is ElementType)
+                    {
+                        var tag = (ElementType)control.Tag;
+                        if (control.Text.Trim() == "")
+                        {
+                            model.ElementData.Remove(tag);
+                        }
+                        else
+                        {
+                            if (model.ElementData.ContainsKey(tag))
+                                model.ElementData[tag] = control.Text;
+                            else
+                                model.ElementData.Add(tag, control.Text);
+                        }
+                    }
+                    else if (control.Tag is string)
+                    {
+                        model.Name = control.Text;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取模型数据至输入面板
+        /// </summary>
+        private void ModelToInput(TemplateFillModel model)
+        {
+            pInput.Controls.Find(FillNameString, false)[0].Text = model.Name;
+            foreach (var i in model.ElementData)
+            {
+                Control[] control = pInput.Controls.Find(i.Key.ToString(), false);
+                if (control.Length >= 1)
+                    control[0].Text = i.Value;
+            }
+
+        }
+
+        /// <summary>
+        /// 设置状态
+        /// </summary>
+        private void SetState(string text)
+        {
+            switch (text)
+            {
+                case StateText.新建:
+                    lbList.SelectedIndex = -1;
+                    ClearInput();
+                    break;
+                case StateText.克隆:
+                    lbList.SelectedIndex = -1;
+                    break;
+                case StateText.编辑:
+                    ClearInput();
+                    ModelToInput(Core.Program.Config.TemplateFillList[lbList.SelectedIndex]);
+                    goto case "编辑_状态文本";
+                case StateText.编辑_已保存:
+                    TemplateFillModel model = null;
+                    if (lbList.SelectedIndex == -1)
+                    {
+                        model = new TemplateFillModel();
+                        Core.Program.Config.TemplateFillList.Add(model);
+                    }
+                    else
+                    {
+                        model = Core.Program.Config.TemplateFillList[lbList.SelectedIndex];
+                    }
+                    InputToModel(model);
+                    Core.Program.Config.TemplateFillList.Sort();
+                    Core.Program.SaveConfig();
+                    RefreshList();
+                    goto case "编辑_状态文本";
+                case "编辑_状态文本":
+                    text = $"{text} [{lbList.SelectedIndex}] {Core.Program.Config.TemplateFillList[lbList.SelectedIndex].Name}";
+                    break;
+            }
+            lState.Text = text;
+        }
+
+        /// <summary>
+        /// 状态文本
+        /// </summary>
+        private static class StateText
+        {
+            public const string 新建 = "新建:";
+            public const string 克隆 = "克隆:";
+            public const string 编辑 = "编辑:";
+            public const string 编辑_已保存 = "编辑: (已保存)";
         }
     }
 }

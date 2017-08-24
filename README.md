@@ -3,7 +3,7 @@
 为方便家人打印快递单而开发的小工具，专注于打印，没有各种高级功能。
 
 ## 开发和构建
-开发环境：Visual Studio 2017。  
+开发环境是`Visual Studio 2017`。  
 确保已经安装`MSBuild.exe`，使用`PowerShell`执行`\source\build.ps1`，完整程序文件将生成到`\source\build\`。
 
 ## 功能

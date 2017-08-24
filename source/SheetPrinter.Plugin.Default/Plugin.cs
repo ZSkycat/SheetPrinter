@@ -7,8 +7,8 @@ namespace SheetPrinter.Plugin.Default
     {
         public string PluginInfo { get; } = "默认插件";
 
-        public string[] ModeNameList { get; } = { "通用编辑", "淘宝物流格式" };
+        public string[] ModeNameList { get; } = { "通用编辑", "淘宝地址格式" };
 
-        public Type[] ModeTypeList { get; } = { typeof(ModeCommon) };
+        public Type[] ModeTypeList { get; } = { typeof(ModeCommon), typeof(ModeTaobao) };
     }
 }

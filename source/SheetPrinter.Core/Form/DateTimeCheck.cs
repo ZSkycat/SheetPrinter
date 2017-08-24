@@ -29,6 +29,21 @@ namespace SheetPrinter.Core.Form
             CheckTime();
         }
 
+        /// <summary>
+        /// 清除输入
+        /// </summary>
+        public void Clear()
+        {
+            cbEnable.Checked = false;
+            dtpTime.Value = DateTime.Now;
+        }
+
+        private void DateTimeCheck_EnabledChanged(object sender, EventArgs e)
+        {
+            cbEnable.Enabled = Enabled;
+            dtpTime.Enabled = Enabled;
+        }
+
         private void cbEnable_CheckedChanged(object sender, EventArgs e)
         {
             dtpTime_ValueChanged(dtpTime, null);

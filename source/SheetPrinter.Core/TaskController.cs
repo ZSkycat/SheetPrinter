@@ -19,7 +19,8 @@ namespace SheetPrinter.Core
         /// </summary>
         /// <param name="data">模板数据</param>
         /// <param name="pluginData">插件自定义数据</param>
-        public static void Add(TemplateModel data, object pluginData = null)
+        /// <returns>返回创建的任务</returns>
+        public static TaskInfoModel Add(TemplateModel data, object pluginData = null)
         {
             TaskInfoModel model = new TaskInfoModel()
             {
@@ -27,6 +28,7 @@ namespace SheetPrinter.Core
                 PluginData = pluginData,
             };
             TaskList.Add(model);
+            return model;
         }
 
         /// <summary>

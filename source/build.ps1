@@ -14,7 +14,7 @@ if (Test-Path $buildSheetPrinter) {
 }
 mkdir $buildSheetPrinter | Out-Null
 
-Copy-Item -Recurse "SheetPrinter\bin\Release\*" $buildSheetPrinter
+Copy-Item -Recurse "SheetPrinter\bin\Release\*" $buildSheetPrinter | Out-Null
 Copy-Item "PrinterTool\bin\Release\PrinterTool.exe" $buildSheetPrinter
 Copy-Item "SheetPrinter.Plugin.Default\bin\Release\SheetPrinter.Plugin.Default.dll" "$buildSheetPrinter/plugin"
 

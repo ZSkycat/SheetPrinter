@@ -10,7 +10,7 @@ namespace SheetPrinter.Core.Model
         /// <summary>
         /// 任务 ID
         /// </summary>
-        public Guid Id { get; } = new Guid();
+        public Guid Id { get; } = Guid.NewGuid();
 
         /// <summary>
         /// 模板数据

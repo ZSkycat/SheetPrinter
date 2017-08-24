@@ -52,12 +52,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormConfig.cs">
@@ -66,23 +62,11 @@
     <Compile Include="FormConfig.Designer.cs">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\Core\UnitlHelper.cs" />
-    <Compile Include="old\Core\PrintControl.cs" />
-    <Compile Include="old\DataModel\ConfigData.cs" />
-    <Compile Include="old\DataModel\ElementData.cs" />
-    <Compile Include="old\DataModel\InfoData.cs" />
-    <Compile Include="old\DataModel\TemplateData.cs" />
     <Compile Include="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAbout.Designer.cs">
       <DependentUpon>FormAbout.cs</DependentUpon>
-    </Compile>
-    <Compile Include="old\FormInputTaobao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\FormInputTaobao.Designer.cs">
-      <DependentUpon>FormInputTaobao.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -90,19 +74,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\FormInputCommon.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="old\FormInputCommon.Designer.cs">
-      <DependentUpon>FormInputCommon.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormFillManage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormFillManage.Designer.cs">
       <DependentUpon>FormFillManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="old\Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAbout.resx">
@@ -114,14 +91,8 @@
     <EmbeddedResource Include="FormFillManage.resx">
       <DependentUpon>FormFillManage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="old\FormInputTaobao.resx">
-      <DependentUpon>FormInputTaobao.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="old\FormInputCommon.resx">
-      <DependentUpon>FormInputCommon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -134,9 +105,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
-    <None Include="config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

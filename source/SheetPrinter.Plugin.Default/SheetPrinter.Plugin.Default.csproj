@@ -32,8 +32,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModeCommon.cs">
@@ -41,6 +43,12 @@
     </Compile>
     <Compile Include="ModeCommon.Designer.cs">
       <DependentUpon>ModeCommon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModeTaobao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModeTaobao.Designer.cs">
+      <DependentUpon>ModeTaobao.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,9 +63,12 @@
     <EmbeddedResource Include="ModeCommon.resx">
       <DependentUpon>ModeCommon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModeTaobao.resx">
+      <DependentUpon>ModeTaobao.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(ProjectName).dll $(SolutionDir)SheetPrinter\bin\Debug\plugin\</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName)==Debug copy $(ProjectName).dll $(SolutionDir)SheetPrinter\bin\Debug\plugin\</PostBuildEvent>
   </PropertyGroup>
 </Project>

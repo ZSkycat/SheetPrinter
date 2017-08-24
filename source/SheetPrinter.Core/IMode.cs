@@ -11,12 +11,12 @@ namespace SheetPrinter.Core
         /// 新建入口
         /// </summary>
         /// <param name="data">模板数据</param>
-        void RunNew(TemplateModel data);
+        void RunNew(TemplateModel model);
 
         /// <summary>
         /// 编辑入口
         /// </summary>
         /// <param name="data">任务数据</param>
-        void RunEdit(TaskInfoModel data);
+        void RunEdit(TaskInfoModel model);
     }
 }

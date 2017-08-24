@@ -34,12 +34,14 @@
             // 
             // dtpTime
             // 
+            this.dtpTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpTime.CustomFormat = "yyyy年MM月dd日HH时mm分ss秒";
-            this.dtpTime.Dock = System.Windows.Forms.DockStyle.Right;
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTime.Location = new System.Drawing.Point(25, 0);
+            this.dtpTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(200, 21);
+            this.dtpTime.Size = new System.Drawing.Size(225, 25);
             this.dtpTime.TabIndex = 0;
             this.dtpTime.ValueChanged += new System.EventHandler(this.dtpTime_ValueChanged);
             // 
@@ -47,6 +49,7 @@
             // 
             this.cbEnable.AutoSize = true;
             this.cbEnable.Location = new System.Drawing.Point(5, 5);
+            this.cbEnable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbEnable.Name = "cbEnable";
             this.cbEnable.Size = new System.Drawing.Size(15, 14);
             this.cbEnable.TabIndex = 1;
@@ -55,12 +58,15 @@
             // 
             // DateTimeCheck
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cbEnable);
             this.Controls.Add(this.dtpTime);
+            this.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DateTimeCheck";
-            this.Size = new System.Drawing.Size(225, 21);
+            this.Size = new System.Drawing.Size(250, 25);
+            this.EnabledChanged += new System.EventHandler(this.DateTimeCheck_EnabledChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

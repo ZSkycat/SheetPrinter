@@ -140,6 +140,7 @@
             this.lvTaskList.TabIndex = 0;
             this.lvTaskList.UseCompatibleStateImageBehavior = false;
             this.lvTaskList.View = System.Windows.Forms.View.Details;
+            this.lvTaskList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvTaskList_MouseDoubleClick);
             // 
             // menuTaskItem
             // 
@@ -186,21 +187,21 @@
             // toolStripMenuItem打印配置
             // 
             this.toolStripMenuItem打印配置.Name = "toolStripMenuItem打印配置";
-            this.toolStripMenuItem打印配置.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem打印配置.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem打印配置.Text = "打印配置";
             this.toolStripMenuItem打印配置.Click += new System.EventHandler(this.toolStripMenuItem打印配置_Click);
             // 
             // toolStripMenuItem字体配置
             // 
             this.toolStripMenuItem字体配置.Name = "toolStripMenuItem字体配置";
-            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem字体配置.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem字体配置.Text = "字体配置";
             this.toolStripMenuItem字体配置.Click += new System.EventHandler(this.toolStripMenuItem字体配置_Click);
             // 
             // toolStripMenuItem填充管理
             // 
             this.toolStripMenuItem填充管理.Name = "toolStripMenuItem填充管理";
-            this.toolStripMenuItem填充管理.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem填充管理.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem填充管理.Text = "填充管理";
             this.toolStripMenuItem填充管理.Click += new System.EventHandler(this.toolStripMenuItem填充管理_Click);
             // 

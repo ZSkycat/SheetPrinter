@@ -60,8 +60,10 @@ namespace SheetPrinter.Core.Form
             Controls.Add(content);
 
             timer = new Timer();
-            timer.Interval = 1500;
+            timer.Interval = 500;
             timer.Tick += (sender, e) => { RefreshPreview(); };
+
+            Disposed += (sender, e) => { timer.Stop(); };
         }
 
         /// <summary>
@@ -69,7 +71,16 @@ namespace SheetPrinter.Core.Form
         /// </summary>
         public void RefreshPreview()
         {
-            DrawPreview(null);
+            if ((DateTime.Now - drawTime) > new TimeSpan(5000000))
+            {
+                RefreshPreview(null);
+                drawTime = DateTime.Now;
+                timer.Stop();
+            }
+            else if (!timer.Enabled)
+            {
+                timer.Start();
+            }
         }
 
         /// <summary>
@@ -77,16 +88,7 @@ namespace SheetPrinter.Core.Form
         /// </summary>
         private void RefreshPreview(Graphics g)
         {
-            if ((DateTime.Now - drawTime) > new TimeSpan(15000000))
-            {
-                DrawPreview(g ?? content.CreateGraphics());
-                drawTime = DateTime.Now;
-                timer.Stop();
-            }
-            else
-            {
-                timer.Start();
-            }
+            DrawPreview(g ?? content.CreateGraphics());
         }
 
         /// <summary>

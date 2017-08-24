@@ -89,7 +89,7 @@ namespace SheetPrinter
         /// <summary>
         /// 在输入面板创建 Label + TextBox
         /// </summary>
-        /// <param name="y">y 坐标</param>
+        /// <param name="y">Y 坐标</param>
         /// <param name="tag">标识对象</param>
         private void CreateItemInInput(int y, object tag)
         {

@@ -125,6 +125,11 @@ namespace SheetPrinter
             RefreshTaskList();
         }
 
+        private void lvTaskList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            编辑ToolStripMenuItem_Click(null, null);
+        }
+
         /// <summary>
         /// 刷新任务列表
         /// </summary>

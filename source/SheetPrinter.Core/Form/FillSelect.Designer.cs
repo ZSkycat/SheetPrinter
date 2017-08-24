@@ -34,20 +34,24 @@
             // cbSelect
             // 
             this.cbSelect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSelect.FormattingEnabled = true;
             this.cbSelect.Location = new System.Drawing.Point(0, 0);
+            this.cbSelect.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cbSelect.Name = "cbSelect";
-            this.cbSelect.Size = new System.Drawing.Size(150, 20);
+            this.cbSelect.Size = new System.Drawing.Size(200, 27);
             this.cbSelect.TabIndex = 0;
-            this.cbSelect.SelectedIndexChanged += new System.EventHandler(this.cbSelect_SelectedIndexChanged);
             // 
             // FillSelect
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.cbSelect);
+            this.Font = new System.Drawing.Font("微软雅黑", 9.75F);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "FillSelect";
-            this.Size = new System.Drawing.Size(150, 20);
+            this.Size = new System.Drawing.Size(200, 27);
+            this.EnabledChanged += new System.EventHandler(this.FillSelect_EnabledChanged);
             this.ResumeLayout(false);
 
         }

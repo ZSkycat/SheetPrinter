@@ -34,6 +34,7 @@ namespace SheetPrinter.Core.Form
             cbSelect.DataSource = Program.Config.TemplateFillList;
             cbSelect.DisplayMember = "Name";
             cbSelect.SelectedIndex = -1;
+            cbSelect.SelectedIndexChanged += cbSelect_SelectedIndexChanged;
         }
 
         /// <summary>
@@ -45,6 +46,22 @@ namespace SheetPrinter.Core.Form
                 throw new NotSupportedException("一次性填充模式下不可用.");
             else
                 FillDataModel();
+        }
+
+        /// <summary>
+        /// 清除选择，一次性填充模式下不可用
+        /// </summary>
+        public void Clear()
+        {
+            if (flagOne)
+                throw new NotSupportedException("一次性填充模式下不可用.");
+            else
+                cbSelect.SelectedIndex = -1;
+        }
+
+        private void FillSelect_EnabledChanged(object sender, EventArgs e)
+        {
+            cbSelect.Enabled = Enabled;
         }
 
         private void cbSelect_SelectedIndexChanged(object sender, EventArgs e)

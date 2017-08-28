@@ -13,6 +13,15 @@ namespace SheetPrinter.Core.Form
         private bool flagOne;
 
         /// <summary>
+        /// 获取或设置选择的索引
+        /// </summary>
+        public int SelectedIndex
+        {
+            get => cbSelect.SelectedIndex;
+            set => cbSelect.SelectedIndex = value;
+        }
+
+        /// <summary>
         /// 数据填充进模型后发生
         /// </summary>
         public event EventHandler DataModelChanged;

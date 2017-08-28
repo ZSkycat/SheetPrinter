@@ -10,6 +10,24 @@ namespace SheetPrinter.Core.Form
         private TemplateModel data;
 
         /// <summary>
+        /// 获取或设置是否启用
+        /// </summary>
+        public bool Checked
+        {
+            get => cbEnable.Checked;
+            set => cbEnable.Checked = value;
+        }
+
+        /// <summary>
+        /// 获取或设置时间数值
+        /// </summary>
+        public DateTime DateTimeValue
+        {
+            get => dtpTime.Value;
+            set => dtpTime.Value = value;
+        }
+
+        /// <summary>
         /// 数据填充进模型后发生
         /// </summary>
         public event EventHandler DataModelChanged;
@@ -26,7 +44,69 @@ namespace SheetPrinter.Core.Form
         public void Initialize(TemplateModel data)
         {
             this.data = data;
-            CheckTime();
+
+            StringBuilder customFormat = new StringBuilder();
+            DateTime time = new DateTime(0);
+            ElementModel model;
+
+            model = data.ElementList.Find(o => o.Type == ElementType.Year);
+            if (model != null)
+            {
+                customFormat.Append("yyyy年");
+                if (!string.IsNullOrEmpty(model.Value))
+                    time = time.AddYears(Convert.ToInt32(model.Value) - 1);
+            }
+
+            model = data.ElementList.Find(o => o.Type == ElementType.Month);
+            if (model != null)
+            {
+                customFormat.Append("MM月");
+                if (!string.IsNullOrEmpty(model.Value))
+                    time = time.AddMonths(Convert.ToInt32(model.Value) - 1);
+            }
+
+            model = data.ElementList.Find(o => o.Type == ElementType.Day);
+            if (model != null)
+            {
+                customFormat.Append("dd日");
+                if (!string.IsNullOrEmpty(model.Value))
+                    time = time.AddDays(Convert.ToInt32(model.Value) - 1);
+            }
+
+            model = data.ElementList.Find(o => o.Type == ElementType.Hour);
+            if (model != null)
+            {
+                customFormat.Append("HH时");
+                if (!string.IsNullOrEmpty(model.Value))
+                    time = time.AddHours(Convert.ToInt32(model.Value));
+            }
+
+            model = data.ElementList.Find(o => o.Type == ElementType.Minute);
+            if (model != null)
+            {
+                customFormat.Append("mm分");
+                if (!string.IsNullOrEmpty(model.Value))
+                    time = time.AddMinutes(Convert.ToInt32(model.Value));
+            }
+
+            model = data.ElementList.Find(o => o.Type == ElementType.Second);
+            if (model != null)
+            {
+                customFormat.Append("ss秒");
+                if (!string.IsNullOrEmpty(model.Value))
+                    time = time.AddSeconds(Convert.ToInt32(model.Value));
+            }
+
+            dtpTime.CustomFormat = customFormat.ToString();
+            if (time.Ticks != 0)
+            {
+                dtpTime.Value = time;
+                cbEnable.Checked = true;
+            }
+            else
+            {
+                cbEnable.Checked = false;
+            }
         }
 
         /// <summary>
@@ -55,7 +135,7 @@ namespace SheetPrinter.Core.Form
             {
                 data.ElementList.ForEach(o =>
                 {
-                    switch(o.Type)
+                    switch (o.Type)
                     {
                         case ElementType.Year:
                             o.Value = dtpTime.Value.Year.ToString();
@@ -96,24 +176,6 @@ namespace SheetPrinter.Core.Form
                 });
             }
             DataModelChanged?.Invoke(this, null);
-        }
-
-        private void CheckTime()
-        {
-            StringBuilder customFormat = new StringBuilder();
-            if (data.ElementList.FindIndex(o => o.Type == ElementType.Year) >= 0)
-                customFormat.Append("yyyy年");
-            if (data.ElementList.FindIndex(o => o.Type == ElementType.Month) >= 0)
-                customFormat.Append("MM月");
-            if (data.ElementList.FindIndex(o => o.Type == ElementType.Day) >= 0)
-                customFormat.Append("dd日");
-            if (data.ElementList.FindIndex(o => o.Type == ElementType.Hour) >= 0)
-                customFormat.Append("HH时");
-            if (data.ElementList.FindIndex(o => o.Type == ElementType.Minute) >= 0)
-                customFormat.Append("mm分");
-            if (data.ElementList.FindIndex(o => o.Type == ElementType.Second) >= 0)
-                customFormat.Append("ss秒");
-            dtpTime.CustomFormat = customFormat.ToString();
         }
     }
 }

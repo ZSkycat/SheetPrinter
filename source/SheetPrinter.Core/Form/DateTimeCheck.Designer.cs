@@ -41,6 +41,7 @@
             this.dtpTime.Location = new System.Drawing.Point(25, 0);
             this.dtpTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpTime.Name = "dtpTime";
+            this.dtpTime.ShowUpDown = true;
             this.dtpTime.Size = new System.Drawing.Size(225, 25);
             this.dtpTime.TabIndex = 0;
             this.dtpTime.ValueChanged += new System.EventHandler(this.dtpTime_ValueChanged);

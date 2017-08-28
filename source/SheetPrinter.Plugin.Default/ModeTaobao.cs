@@ -34,6 +34,7 @@ namespace SheetPrinter.Plugin.Default
             data = model.Data.Clone();
             Initialize();
             Text += " - 编辑";
+            LoadPluginData();
             Show();
         }
 
@@ -60,7 +61,7 @@ namespace SheetPrinter.Plugin.Default
 
         private void tsbAddTask_Click(object sender, EventArgs e)
         {
-            task = TaskController.Add(data);
+            task = TaskController.Add(data, SavePluginData());
             tsbSaveTask.Visible = true;
             tsbDelete.Visible = true;
         }
@@ -68,6 +69,7 @@ namespace SheetPrinter.Plugin.Default
         private void tsbSaveTask_Click(object sender, EventArgs e)
         {
             task.Data = data.Clone();
+            task.PluginData = SavePluginData();
         }
 
         private void tsbDelete_Click(object sender, EventArgs e)
@@ -77,6 +79,33 @@ namespace SheetPrinter.Plugin.Default
                 TaskController.Delete(task);
                 Close();
             }
+        }
+
+        private object SavePluginData()
+        {
+            return new PluginData_ModeTaobao()
+            {
+                SelectedIndex = fillSelect.SelectedIndex,
+                TextTaobao = tbTaobao.Text,
+                TextItemName = tbItemName.Text,
+            };
+        }
+
+        private void LoadPluginData()
+        {
+            if (task.PluginData is PluginData_ModeTaobao pluginData)
+            {
+                fillSelect.SelectedIndex = pluginData.SelectedIndex;
+                tbTaobao.Text = pluginData.TextTaobao;
+                tbItemName.Text = pluginData.TextItemName;
+            }
+        }
+
+        private class PluginData_ModeTaobao
+        {
+            public int SelectedIndex { get; set; }
+            public string TextTaobao { get; set; }
+            public string TextItemName { get; set; }
         }
         #endregion
 

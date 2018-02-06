@@ -14,9 +14,9 @@
 - 可批量打印的任务功能
 
 ## 模版配置
-- 模版文件位置 .\template\*.json
-- 属性 Width, Height, X, Y 的单位是 cm
-- 属性 Type 由 ElementType 规定
+- 模版文件位置 `.\template\*.json`
+- 属性的长度单位是 cm
+- 属性 `Type` 由 `ElementType` 规定
 - 更多信息请查看源码
 
 ## Dependency

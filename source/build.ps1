@@ -1,26 +1,18 @@
-﻿# Path
-$msBuildPath = (Get-ChildItem "C:\Program Files (x86)\Microsoft Visual Studio\*\Community\MSBuild\*.*\Bin\")[0].FullName  # 无尾/
-$projectPath = Split-Path $MyInvocation.MyCommand.Path  # 无尾/
+﻿# Constant
+$MsBuild = (Get-ChildItem "C:\Program Files (x86)\Microsoft Visual Studio\*\*\MSBuild\*\Bin\MSBuild.exe")[0].FullName
+$ProjectPath = $PSScriptRoot
+$BuildPath = "$PSScriptRoot\build\SheetPrinter\"
 
 # Build
-Set-Location $projectPath
-& "$msBuildPath/MSBuild.exe" "SheetPrinter.sln" /t:Build /p:Configuration=Release /p:Platform="Any CPU" /v:m
+& "$MsBuild" "$ProjectPath\SheetPrinter.sln" /t:Build /p:Configuration=Release /p:Platform="Any CPU" /v:m
 
 # Clear And Copy
-$buildSheetPrinter = Join-Path $projectPath "build/SheetPrinter"
+Remove-Item -Recurse $BuildPath -ErrorAction Ignore
+New-Item $BuildPath -ItemType Directory -ErrorAction Ignore
+New-Item "$BuildPath\plugin\" -ItemType Directory -ErrorAction Ignore
 
-if (Test-Path $buildSheetPrinter) {
-    Remove-Item -Recurse $buildSheetPrinter
-}
-mkdir $buildSheetPrinter | Out-Null
+Copy-Item -Recurse -Exclude "*.pdb", "*.xml" "$ProjectPath\SheetPrinter\bin\Release\*" $BuildPath
+Copy-Item "$ProjectPath\PrinterTool\bin\Release\PrinterTool.exe" $BuildPath
+Copy-Item "$ProjectPath\SheetPrinter.Plugin.Default\bin\Release\SheetPrinter.Plugin.Default.dll" "$BuildPath\plugin\"
 
-Copy-Item -Recurse "SheetPrinter\bin\Release\*" $buildSheetPrinter | Out-Null
-Copy-Item "PrinterTool\bin\Release\PrinterTool.exe" $buildSheetPrinter
-Copy-Item "SheetPrinter.Plugin.Default\bin\Release\SheetPrinter.Plugin.Default.dll" "$buildSheetPrinter/plugin"
-
-Remove-Item "$buildSheetPrinter\*.pdb"
-Remove-Item "$buildSheetPrinter\*.xml"
-
-# End
-Write-Host 'Build End!'
-Read-Host
+Read-Host 'Exit'

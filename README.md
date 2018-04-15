@@ -1,9 +1,9 @@
-# SheetPrintTool
-物流运单打印工具。  
+# SheetPrinter
+物流运单打印工具。
 为方便家人打印快递单而开发的小工具，专注于打印，没有各种高级功能。
 
 ## 开发和构建
-使用`Visual Studio 2017`开发，目标`.NET Framework 3.5`。  
+使用`Visual Studio 2017`开发，目标`.NET Framework 3.5`。
 确保已经`还原 NuGet`，执行`\source\build.ps1`，完整程序文件将生成到`\source\build\`。
 
 ## 功能
@@ -22,5 +22,5 @@
 ## Dependency
 - [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 
-# License
+## License
 Licensed under the [MIT License](https://github.com/ZSkycat/SheetPrintTool/blob/master/LICENSE).

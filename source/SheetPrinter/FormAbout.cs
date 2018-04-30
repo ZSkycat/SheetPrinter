@@ -12,10 +12,10 @@ namespace SheetPrinter
 
         private void FormAbout_Load(object sender, EventArgs e)
         {
-            tbInfo.Text = @"SheetPrintTool (物流运单打印工具) Build3
+            tbInfo.Text = @"SheetPrinter (物流运单打印工具)
 Author: ZSkycat (梓天猫)
 Github: https://github.com/ZSkycat/SheetPrinter
-License: MIT License
+License: MIT
 ";
         }
 

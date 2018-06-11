@@ -4,7 +4,7 @@
 
 ## 开发和构建
 使用 `Visual Studio 2017` 开发，目标 `.NET Framework 3.5`。<br>
-确保已经 `还原 NuGet`，执行 `/tool/build.ps1`，完整程序文件将生成到 `/publish/`。
+确保已经 `还原 NuGet`，执行 `/tool/publish.ps1`，完整程序文件将生成到 `/publish/`。
 
 ## 功能
 - 使用 `json` 配置的运单模版
@@ -21,5 +21,5 @@
 ## 依赖
 - [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 
-## 协议
+## 许可协议
 [MIT](https://github.com/ZSkycat/SheetPrintTool/blob/master/LICENSE)
